@@ -18,7 +18,7 @@
         <div style="display: flex; margin-top: 30px; justify-content: space-around;">
             <div></div>
             <div> <a class="btnhead" href="cadastro.php" style="color: white; font-size: 18px; text-decoration: none;">Cadastre-se</a> </div>
-            <div> <a class="btnhead" href="" style="color: Black; font-size: 18px; text-decoration: none;">Prestar Serviços</a></div>
+            <div> <a class="btnhead" href="prestar.php" style="color: Black; font-size: 18px; text-decoration: none;">Prestar Serviços</a></div>
             <div> <a class="btnhead" href="" style="color: Black; font-size: 18px; text-decoration: none;">Solicitar Serviço</a></div>
             <div> <a class="btnhead" href="sobre.php" style="color: Black; font-size: 18px; text-decoration: none;">Sobre</a></div>
             <div><a style="color: black; text-decoration:none; display: flex; align-items: center;" href=""> PT/BR <img style="width: 40px;" src="img/istockphoto-530810572-612x612.jpg" alt=""></a></div>

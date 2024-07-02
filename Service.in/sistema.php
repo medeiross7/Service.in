@@ -4,7 +4,7 @@
     if((!isset($_SESSION['email'])== true) and (!isset($_SESSION['senha']) == true)){
         header('Location: login.php');
     }
-    $logado = $_SESSION['email'];//email conectado na sessao, atentar na hora de fazer o layout
+    $logado = $_SESSION['email']; //email conectado na sessao, atentar na hora de fazer o layout
 ?>
 <!DOCTYPE html>
 <html lang="en">
