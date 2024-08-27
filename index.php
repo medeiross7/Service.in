@@ -112,11 +112,41 @@ if(isset($_POST['submit'])) {
     .contrate{
             background-color: gray;
             display:flex;
+            background-image: url('img/servico-encanador-bauru.jpg');
+            background-size: cover; /* Faz a imagem cobrir toda a área da div */
+            background-position: center; /* Centraliza a imagem */
+            background-repeat: no-repeat;
+            border-radius: 18px;
+            
         }
 
 
         .central{
             display:flex;
+        }
+
+        .imgcentral{
+          margin-top: -7vh;
+          width: 50.5vw;
+          
+        }
+        .acentral{
+          padding: 8px;
+          background-color: #238E68;
+          text-decoration: none;
+          color: black;
+          border-radius: 12px;
+          width: 10vw;
+          font-weight: 700;
+          position: absolute;
+          top: 80%;
+          left: 65%;
+        }
+        .txtcentral{
+          position: absolute;
+          top: 65%;
+          left: 65%;
+          color: white;
         }
     </style>
 </head>
@@ -125,7 +155,8 @@ if(isset($_POST['submit'])) {
     <div style="height: 20vh; background-color: #238E68; display: flex;  flex-direction: column;" class="incial">
       
         <div style="margin-left:   35vw ; heigth: 20vh;">
-            <img style="heigth: 10vh;" src="img/Servece 1.png" alt="">
+            <a href="index.php"><img style="heigth: 10vh;" src="img/Servece 1.png" alt=""></a>
+            
         </div>
 
 
@@ -140,30 +171,13 @@ if(isset($_POST['submit'])) {
 
     </div>
     </div>
-    <div class="central">
+    <div  class="central">
         <div class="contrate">
             <div class="contrate1">
-                <div>
-                    <h2 class="txtcontrate">Contrate a Service.in a qualquer <br> hora e em qualquer lugar...</h2>
-                </div>
-                <div style="margin-top: 10vh;">
-                    <h4>Local do Serviço...</h4>
-                    <input class="inputlocal" type="text">
-                </div>
-                <div style="margin-top: 10vh;">
-                    <h4>Qual Serviço Solicitado?</h4>
-                    <input class="inputservico" type="text">
-                </div>
-            </div>
-
-        
-
-            <!-- API GPS -->
-            <div class="apigps">
-
-            </div>
-
-
+              <h2 class="txtcentral">Esta Precisando de algum <br>serviço domestico, nos da <br> Service.in oferecemos esses <br> serviços, solicite aqui</h2>
+              <a class="acentral" href="solicitar.php">SOLICITAR SERVICO</a>
+                
+            </div>     
         </div>
     </div>
     <div class="central2">
@@ -182,7 +196,7 @@ if(isset($_POST['submit'])) {
                 <p style="color: white; font-size:18px;">Nao dependa de seus contatos para <br> trabalha, ganhe dinheiro o tempo todo <br> com usuarios proximos</p>
             </div>
             <div style="margin-top: 20px; margin-left: 14vw;">
-                <a class="junte" href="">Junte-Se A Nos</a>
+                <a class="junte" href="prestarservico.php">Junte-Se A Nos</a>
             </div>
         </div>
     </div>
