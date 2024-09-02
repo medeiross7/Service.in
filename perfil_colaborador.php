@@ -1,4 +1,11 @@
-
+<?php
+    session_start();
+   // print_r($_SESSION);
+    if((!isset($_SESSION['email'])== true) and (!isset($_SESSION['senha']) == true)){
+        header('Location: login.php');
+    }
+    $logado = $_SESSION['email']; //email conectado na sessao, atentar na hora de fazer o layout
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -6,10 +13,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-</head>
-<body>
-
-<style>
+    <style>
           body{
             background-color: #238E68;
             font-family: Arial, Helvetica, sans-serif;
@@ -37,6 +41,7 @@
              margin-bottom: 3vh;
              margin-left: -10vh;
              display:flex;
+             
         }
 
         p{
@@ -56,8 +61,20 @@
             height: 3vh ;
    
         }
+        .aperfil{
+            text-decoration: none;
+             color: black;
+        }
+        
+        .aperfil:hover{
+            background-color: rgba(0, 0, 0, 0.5);
+        }
 
 </style>
+</head>
+<body>
+
+
         <form action="delete.php" method="POST">
         <div class="d-mae">
 
@@ -70,9 +87,9 @@
     <div class="div-cin">
     <div class="mg">Alterar telefone <p></p>  (**)*****-**** <input class="inp" type="tel"> </div>
     <div class="mg">Alterar email <p></p> *************@gmail.com <input class="inp" type="text"> </div>
-    <div class="mg">Alterar Senha <p></p> ********* <input class="inp"  type="">  </div>
+    
 
-    <div class="mg">adicionar tipo de serviço 
+    <div class="mg">Adicionar tipo de serviço 
         <div>  <select class="sel" name="cars">
               <option value="volvo">Hidraulica</option>
                 <option value="saab">Eletrica</option>
@@ -85,15 +102,14 @@
 
 
         <div class="div-cin">
-
-        <div class="mg">Alterar sobre <p></p> </div>
-        <div class="mg">Alterar senha<p></p></div>
-        <div class="mg">Alterar Fotos do Perfil <p></p></div>
-
+        <a class="aperfil"  href="alterarsobre.php"><div class="mg">Alterar sobre <p></p> </div></a>
+        <a class="aperfil"  href="alterarsenha.php"><div class="mg">Alterar senha<p></p></div></a>
+        <a class="aperfil"  href="alterarfoto.php"><div class="mg">Alterar Fotos do Perfil <p></p></div></a>
         </div>
 
         <div>
-        <input class="btn-del"  type="button" value="Excluir Conta" name="deletar">
+            <a href="index.php"> <input class="btn-del"   type="button" value="Excluir Conta" name="deletar"></a>
+       
         <input class="btn-del"  type="button" value="Alterar" name="alterar">
         </div>
 

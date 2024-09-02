@@ -58,18 +58,16 @@
 <body style="font-family: Arial, Helvetica, sans-serif;">
 <div style="height: 20vh; background-color: #238E68; display: flex;  flex-direction: column;" class="incial">
         <div style="margin-left:   35vw ; heigth: 20vh;">
-            <a href="index.php"><img style="heigth: 10vh;" src="img/Servece 1.png" alt=""></a>
+            <img style="heigth: 10vh;" src="img/Servece 1.png" alt="">
         </div>
-
-        <div style="display: flex; margin-top: 30px; justify-content: space-around; margin-left: -200px;">
-        <div></div>
-        <div> <a class="btnhead" href="cadastro.php" style="color: white; font-size: 18px; text-decoration: none;">Cadastre-se</a> </div>
-        <div> <a class="btnhead" href="prestar.php" style="color: Black; font-size: 18px; text-decoration: none;">Prestar Serviços</a></div>
-        <div> <a class="btnhead" href="solicitar.php" style="color: Black; font-size: 18px; text-decoration: none;">Solicitar Serviço</a></div>
-        <div> <a class="btnhead" href="sobre.php" style="color: Black; font-size: 18px; text-decoration: none;">Sobre</a></div>
-        <div><a href="login.php" style="color: white; font-size: 18px; text-decoration: none;">Login</a></div>
-    </div>
-
+        <div style="display: flex; margin-top: 30px; justify-content: space-around;">
+            <div></div>
+            <div> <a class="btnhead" href="cadastro.php" style="color: white; font-size: 18px; text-decoration: none;">Cadastre-se</a> </div>
+            <div> <a class="btnhead" href="prestar.php" style="color: Black; font-size: 18px; text-decoration: none;">Prestar Serviços</a></div>
+            <div> <a class="btnhead" href="" style="color: Black; font-size: 18px; text-decoration: none;">Solicitar Serviço</a></div>
+            <div> <a class="btnhead" href="sobre.php" style="color: Black; font-size: 18px; text-decoration: none;">Sobre</a></div>
+            <div><a href="login.php" style="color: white; font-size: 18px; text-decoration: none;">Login</a></div>
+        </div>
     </div>
     <div class="divimg">
         

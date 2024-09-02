@@ -1,3 +1,24 @@
+<?php
+if(isset($_POST['submit'])) {
+    include_once('conexao.php');
+
+    $nome = $_POST['nome'];
+    $profissao = $_POST['profissao'];
+    
+
+    $result = mysqli_query($mysqli, "INSERT INTO avaliacao(nome, profissao) VALUES('$nome', '$profissao')");
+
+    if (!$result) {
+        die('Erro na query: ' . mysqli_error($mysqli));
+    }
+
+    mysqli_close($mysqli);
+
+    // Redirecionamento após inserção bem-sucedida
+    header('Location: index.php');
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,6 +42,7 @@
             align-items: center;
             background-color: #D9D9D9;
             height: 100vh   ;
+            
            
         }
 
@@ -151,15 +173,32 @@
             padding-top:3vh;
             font-size:6.2vh;
         }
-
+        #nome{
+            margin-left: 45px;
+        }
+        #submit{
+            background-color: #238e68;
+            border:none;
+            width: 100%;
+            padding: 15px;
+            color: white;
+            font-size: 15px;
+            cursor: pointer;
+            border-radius: 10px;
+            margin-left: 100px;
+        }
+        fieldset{
+            border: 3px solid #238e68;
+        }
     </style>
 </head>
 
 
 <body>
-    
+    <form action="avaliacao.php" method="POST">
+        <fieldset>
         <div class="d-t">
-
+            
             <div class="pri" >
 
                     <div class="d-avaliacao" >AVALIAÇÃO DE PROFISSIONAL</div>
@@ -167,7 +206,12 @@
                     <div class="d-um">
 
                         <div class="aling"><img class="img-p" src="p1.png" alt=""> </div>
-                        <div class="t"  id="d-nm">  NOME/ <br>PROFISSAO   </div>
+                        <div class="t"  id="d-nm">  
+                            <label for="nome" class="labelInput">Nome</label>
+                            <input class="margin-left: 10px;" type="nome" name="nome" id="nome" class="inputUser" required> <br>
+                            <label for="profissao" class="labelInput">Profissão</label>
+                            <input type="text" name="profissao" id="profissao" class="inputUser" required>
+                        </div>
                         <div>
                             <div class="t">DESEJA AVALIAR O <br> SERVIÇO PRESTADO?</div>
 
@@ -182,7 +226,8 @@
 
                      </div>
             </div>
-
+            
+    
 
 
             <div  class="duo">
@@ -228,19 +273,22 @@
                         <div>
                             <div class="div-svg"><svg class="svgs" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"/></svg></div>
                         </div>
-
+                        
                     </div>
+                    <input type="submit" name="submit" id="submit" value="Avaliar" >
                         <!--  -->
                 </div>
 
             </div>
 
-</div>
+        </div>
 
             
 
         </div>
-
+        </fieldset>
+        
+    </form>
        
 
 

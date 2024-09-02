@@ -1,43 +1,71 @@
 <?php
-// Verifica se a mensagem foi enviada via GET
-if(isset($_POST['submit'])) {
-    include_once('conexao.php');
+   include_once('conexao.php');
 
-    $tema = $_POST['tema'];
-    $mensagem = $_POST['mensagem'];
-    $result = mysqli_query($mysqli, "INSERT INTO suporte(tema, mensagem) VALUES('$tema', '$mensagem')");
+   session_start();
+  // print_r($_SESSION);
+   if((!isset($_SESSION['email'])== true) and (!isset($_SESSION['senha']) == true)){
+       header('Location: login.php');
+   }
+   $logado = $_SESSION['email']; //email conectado na sessao, atentar na hora de fazer o layout
 
-    if (!$result) {
-        die('Erro na query: ' . mysqli_error($mysqli));
-    }
 
-    mysqli_close($mysqli);
+if(isset($_POST['update'])){
+    $nome = $_POST['nome'];
+    $email = $_POST['email'];
+    $telefone = $_POST['telefone'];
+    $genero = $_POST['genero'];
+    $data_nascimento = $_POST['data_nascimento'];
+    $cidade = $_POST['cidade'];
+    $estado = $_POST['estado'];
+    $endereco = $_POST['endereco'];
+    $senha = $_POST['senha'];
 
-    // Redirecionamento após inserção bem-sucedida
-    header('Location: index.php');
-    exit;
+    $sqlUpdate = "UPDATE usuarios SET senha='$senha' WHERE id='$id'";
+
+    $result = $conexao->query($sqlUpdate);
+
+    
 }
+
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Service.in</title>
-    <link rel="stylesheet" href="css.css">
-    <link rel="stylesheet" type="text/css" href="public/css.css" />
-
+    <title>Alterar Senha</title>
     <style>
-
-.btnsair{
-            padding: 10px;
-            background-color: white;
-            color: black;
-            text-decoration: none;
+        .divcentro{
+            display: flex;
+            justify-content:center;
+            height: 50vh;
+            
+        }
+        .divcentro div{
+            display:flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 10vh;
+            width: 30vw;
+        }
+        .inputsobre{
+            width: 20vw;
+            height: 5vh;
+            margin-bottom: 20px;
+        }
+        #submit{
+            background-color: #238e68;
+            border:none;
+            width: 40%;
+            padding: 15px;
+            color: white;
+            font-size: 15px;
+            cursor: pointer;
             border-radius: 10px;
+            margin-top: 6vh;
+        }
+        h1{
+           margin-left: -13vw; 
         }
         .chat-button {
       position: fixed; /* Mantém o botão fixo na tela */
@@ -109,108 +137,27 @@ if(isset($_POST['submit'])) {
       margin-left: 10px;
 
     }
-    .contrate{
-            background-color: gray;
-            display:flex;
-            background-image: url('img/servico-encanador-bauru.jpg');
-            background-size: cover; /* Faz a imagem cobrir toda a área da div */
-            background-position: center; /* Centraliza a imagem */
-            background-repeat: no-repeat;
-            border-radius: 18px;
-            
-        }
-
-
-        .central{
-            display:flex;
-        }
-
-        .imgcentral{
-          margin-top: -7vh;
-          width: 50.5vw;
-          
-        }
-        .acentral{
-          padding: 8px;
-          background-color: #238E68;
-          text-decoration: none;
-          color: black;
-          border-radius: 12px;
-          width: 10vw;
-          font-weight: 700;
-          position: absolute;
-          top: 80%;
-          left: 65%;
-        }
-        .txtcentral{
-          position: absolute;
-          top: 65%;
-          left: 65%;
-          color: white;
-        }
     </style>
 </head>
-
-<body style="font-family: Arial, Helvetica, sans-serif;">
+<body style="font-family: Arial, Helvetica, sans-serif; margin: 0;">
     <div style="height: 20vh; background-color: #238E68; display: flex;  flex-direction: column;" class="incial">
       
-        <div style="margin-left:   35vw ; heigth: 20vh;">
-            <a href="index.php"><img style="heigth: 10vh;" src="Servece 1.png" alt=""></a>
-            
-        </div>
-
-
-        <div style="display: flex; margin-top: 30px; justify-content: space-around; margin-left: -200px;">
-        <div></div>
-        <div> <a class="btnhead" href="cadastro.php" style="color: white; font-size: 18px; text-decoration: none;">Cadastre-se</a> </div>
-        <div> <a class="btnhead" href="prestar.php" style="color: Black; font-size: 18px; text-decoration: none;">Prestar Serviços</a></div>
-        <div> <a class="btnhead" href="solicitar.php" style="color: Black; font-size: 18px; text-decoration: none;">Solicitar Serviço</a></div>
-        <div> <a class="btnhead" href="sobre.php" style="color: Black; font-size: 18px; text-decoration: none;">Sobre</a></div>
-        <div><a href="login.php" style="color: white; font-size: 18px; text-decoration: none;">Login</a></div>
-
-
+      <div style="margin-left:   35vw ; heigth: 20vh;">
+          
+        <a href="index.php"><img style="heigth: 10vh;" src="img/Servece 1.png" alt=""></a>
+          
+      </div>
     </div>
-    </div>
-    <div  class="central">
-        <div class="contrate">
-            <div class="contrate1">
-              <h2 class="txtcentral">Esta Precisando de algum <br>serviço domestico, nos da <br> Service.in oferecemos esses <br> serviços, solicite aqui</h2>
-              <a class="acentral" href="solicitar.php">SOLICITAR SERVICO</a>
-                
-            </div>     
+    <div class="divcentro">
+        <div>
+            <h1>Alterar Senha</h1>
+            <form action="alterarsenha.php" method="POST">
+                <input class="inputsobre" type="text" placeholder="Nova Senha" name="senha">
+                <input class="inputsobre" type="text" placeholder="Confimar Senha" name="senha">
+                <input type="submit" name="submit" id="submit" >
+            </form>
         </div>
     </div>
-    <div class="central2">
-        <div class="imagem2">
-            <div style="height: 60vh; width: 45vh;  margin-top: -6vh; border-radius: 1000vh; ">
-                <img style="height: 100%;   width: 100%;" src="Rectangle 13.png" alt="">
-            </div>
-        </div>
-        <div class="colaborador">
-            <div>
-                <h1 style="color: white;">
-                Seja coloborador na nossa <br> empresa e trabalhe quando <br> quiser!
-                </h1>
-            </div>
-            <div style="margin-top: 20px;">
-                <p style="color: white; font-size:18px;">Nao dependa de seus contatos para <br> trabalha, ganhe dinheiro o tempo todo <br> com usuarios proximos</p>
-            </div>
-            <div style="margin-top: 20px; margin-left: 14vw;">
-                <a class="junte" href="prestarservico.php">Junte-Se A Nos</a>
-            </div>
-        </div>
-    </div>
-
-          <!-- RODAPE -->
-
-    <footer class="rodape">
-        <img class="imgfot" src="img/Servece 1.png" alt="">
-        <a href="centraldeajuda.php" style="color: white; margin-left: -4vw; text-decoration: none; margin-top: 20px;">.ACESSO CENTRAL DE AJUDA</a>
-    </footer>
-
-
-
-
     <form action="index.php" method="POST">
         <div class="chat-button" onclick="toggleChat()">
             <i class="fa fa-comment"></i> <!-- Ícone (exemplo usando Font Awesome) -->
@@ -264,5 +211,5 @@ if(isset($_POST['submit'])) {
     }
   }
 </script>
-
+</body>
 </html>

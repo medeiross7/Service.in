@@ -162,7 +162,7 @@
            
         </div>
 
-  <!-- Contêiner do chat -->
+  
     <div class="chat-container" id="chatContainer">
         <div class="chat-header">
         Suporte
@@ -181,7 +181,7 @@
 
   <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 
-<!-- Script JavaScript para mostrar/ocultar o chat e enviar mensagens -->
+
 <script>
   function toggleChat() {
     var chatContainer = document.getElementById('chatContainer');
@@ -192,12 +192,10 @@
     var mensagem = document.getElementById('mensagem').value.trim();
 
     if (mensagem !== '') {
-      // Limpar campo de mensagem
+      
       document.getElementById('mensagem').value = '';
 
-      // Enviar mensagem para o servidor (pode ser implementado aqui)
-
-      // Enviar email (método em PHP)
+      
       var xhttp = new XMLHttpRequest();
       xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
