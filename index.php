@@ -239,7 +239,139 @@ if(isset($_POST['submit'])) {
         .menu-item:hover .submenu {
             display: block;
         }
-        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+
+        }
+
+        .rodape {
+            background-color: #000;
+            height: 270px;
+            width: 100%;
+            padding-bottom: 2vh;
+            padding: 0 6vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+        .paragrafro
+        {
+            color: white;
+            font-size: 24px;
+        }
+        .compartilhe
+        {
+            margin-top: 2rem;
+            margin-bottom: 5rem;
+            border-radius: 30px;
+            padding: 1rem;
+            font-size: 15px;
+            transition: 0.5s;
+            font-weight: 700;
+        }
+
+        .compartilhe:hover
+        {
+            transition: 0.5s;
+            background-color: gray;
+            color: white
+        }
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: -5px;
+            left: 0;
+            right: -20px;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            border-radius: 50%;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+        }
+        input:checked + .slider {
+            background-color: #2196F3;
+        }
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+        .language-label {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            
+        }
+        .language-label span {
+            margin-right: 10px;
+        }
+        .trilho{
+    width: 90px;
+    height: 40px;
+    background-color: #4d4d4d;
+    border-radius: 150px;
+    position: relative;
+    cursor: pointer;
+    margin-top: -7px;
+
+}
+
+.trilho .indicador{
+    width: 40px;
+    height: 40px;
+    background-color: #000;
+    border-radius: 50%;
+    transform: scale(.9);
+    position: absolute;
+    left: 0;
+    transition: .5s;
+}
+
+
+.trilho.dark{
+    background-color: #c3c3c3;
+}
+
+.trilho.dark .indicador{
+left: 50px;
+background-color: #fff;
+}
+body.dark {
+  background-color: #121212;
+  color: #ffffff;
+}
+
+.central.dark {
+  background-color: #1e1e1e;
+}
+
+.rodape.dark {
+  background-color: #1e1e1e;
+}
+
+.chat-container.dark {
+  background-color: #2c2c2c;
+}
     </style>
 </head>
 
@@ -252,24 +384,40 @@ if(isset($_POST['submit'])) {
         </div>
 
 
-        <div style="display: flex; margin-top: 30px; justify-content: space-around; margin-left: -200px;">
+        <div style="display: flex; margin-top: 30px; justify-content: space-around; margin-left: -100px;">
         <div ><ul class="menu">
                 <li class="menu-item">
-                <a href="#" class="menu-link">Menu</a>
+                <a href="#" class="menu-link" id="linkmenu">Menu</a>
                   <ul class="submenu">
-                      <li><a href="perfil_colaborador.php">Perfil</a></li>
-                      <li><a href="#">Alterar Conta</a></li>
-                      <li><a href="perfil_colaborador.php">Alterar Dados do perfil</a></li>
-                      <li><a href="sair.php">Sair</a></li>
+                      <li><a href="perfil_colaborador.php" id="profile">Perfil</a></li>
+                      <li><a href="#" id="account">Alterar Conta</a></li>
+                      <li><a href="perfil_colaborador.php" id="profiledata">Alterar Dados do perfil</a></li>
+                      <li><a href="sair.php" id="leave">Sair</a></li>
                   </ul>
                 </li>
               </ul>
       </div>
-        <div><a class="btnhead" href="login.php" style="color: white; font-size: 18px; text-decoration: none;">Login</a></div>
-        <div> <a class="btnhead" href="cadastro.php" style="color: white; font-size: 18px; text-decoration: none;">Cadastre-se</a> </div>
-        <div> <a class="btnhead" href="prestar.php" style="color: Black; font-size: 18px; text-decoration: none;">Prestar Serviços</a></div>
-        <div> <a class="btnhead" href="solicitar.php" style="color: Black; font-size: 18px; text-decoration: none;">Solicitar Serviço</a></div>
+        <div><a id="login" class="btnhead" href="login.php" style="color: white; font-size: 18px; text-decoration: none;">Login</a></div>
+        <div> <a id="cadastro" class="btnhead" href="cadastro.php" style="color: white; font-size: 18px; text-decoration: none;">Cadastre-se</a> </div>
+        <div> <a id="prestarservicoo" class="btnhead" href="prestar.php" style="color: Black; font-size: 18px; text-decoration: none;">Prestar Serviços</a></div>
+        <div> <a id="solicitarservicoo" class="btnhead" href="solicitar.php" style="color: Black; font-size: 18px; text-decoration: none;">Solicitar Serviço</a></div>
+        <div class="language-label">
+        <span id="lang-label">Portugues:</span>
+        <label class="switch">
+            <input type="checkbox" id="lang-toggle">
+            <span class="slider"></span>
+        </label>
+    </div>
+    <div class="trilho" id="trilho">
+
+        <div class="indicador"></div>
+
+    </div>
+    
+
+    <div id="content">
         
+    </div>
         
 
 
@@ -278,8 +426,8 @@ if(isset($_POST['submit'])) {
     <div  class="central">
         <div class="contrate">
             <div class="contrate1">
-              <h2 class="txtcentral">Esta Precisando de algum <br>serviço domestico, nos da <br> Service.in oferecemos esses <br> serviços, solicite aqui</h2>
-              <a class="acentral" href="solicitar.php">SOLICITAR SERVICO</a>
+              <h2 class="txtcentral" id="precisando">Esta Precisando de algum <br>serviço domestico, nos da <br> Service.in oferecemos esses <br> serviços, solicite aqui</h2>
+              <a class="acentral" href="solicitar.php" id="btnsolicitar">SOLICITAR SERVICO</a>
                 
             </div>     
         </div>
@@ -305,15 +453,6 @@ if(isset($_POST['submit'])) {
         </div>
     </div>
 
-          <!-- RODAPE -->
-
-    <footer class="rodape">
-        <img class="imgfot" src="img/Servece 1.png" alt="">
-        <a href="centraldeajuda.php" style="color: white; margin-left: -4vw; text-decoration: none; margin-top: 20px;">.ACESSO CENTRAL DE AJUDA</a>
-    </footer>
-
-
-
 
     <form action="index.php" method="POST">
         <div class="chat-button" onclick="toggleChat()">
@@ -337,6 +476,32 @@ if(isset($_POST['submit'])) {
     </div>
     </form>
     
+    <div class="rodape">
+        <div>
+            <img src="img/Servece 3.png">
+            <p class="paragrafro">
+                © 2024 Service.in Todos os direitos reservados. <br>    
+                Endereço: Rua Itajúba, 223, floresta, Belo Horizonte - MG, Brasil<br>E-mail: contato@exemplo.com.br <br>
+    
+                Para mais informações, visite nossa pagina SOBRE NÓS ou entre em contato conosco.
+            <p>
+        </div>
+        <divl> 
+            <button class="compartilhe">Compartilhe</button>
+            <p style="color: white; font-family: Arial, Helvetica, sans-serif; font-weight: 700;">
+              Encontre-Nos  
+            </p> 
+            <a href="https://web.whatsapp.com/" target="_blank"><img src="img/Vector.png"></a>
+            <a href="https://www.instagram.com/" target="_blank"><img src="img/Vector (2).png"></a>
+            <a href="https://github.com/" target="_blank"><img src="img/Social Icons (1).png"></a>
+            <a href="https://br.linkedin.com/" target="_blank"><img src="img/Social Icons (2).png"></a>
+        </div>
+        
+    </div>
+
+
+
+    
 
   <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 
@@ -354,9 +519,6 @@ if(isset($_POST['submit'])) {
       // Limpar campo de mensagem
       document.getElementById('mensagem').value = '';
 
-      // Enviar mensagem para o servidor (pode ser implementado aqui)
-
-      // Enviar email (método em PHP)
       var xhttp = new XMLHttpRequest();
       xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -367,6 +529,55 @@ if(isset($_POST['submit'])) {
       xhttp.send();
     }
   }
+  const langToggle = document.getElementById('lang-toggle');
+        const title = document.getElementById('title');
+        const description = document.getElementById('description');
+        const langLabel = document.getElementById('lang-label');
+
+        langToggle.addEventListener('change', () => {
+            if (langToggle.checked) {
+                // Mudar para inglês
+                
+                login.textContent = "Sign In";
+                cadastro.textContent = "Sign Up";
+                prestarservicoo.textContent = "Provide Service";
+                solicitarservicoo.textContent = "Request Service";
+                profile.textContent = "Profile";
+                account.textContent = "Change Account";
+                profiledata.textContent = "Change Profile Data";
+                leave.textContent = "Leave";
+                precisando.textContent = "If you need any domestic service, we at Service.in offer these services, request them here";
+                btnsolicitar.textContent = "REQUEST SERVICE";
+                langLabel.textContent = 'English :';
+            } else {
+                // Voltar para português
+                
+                login.textContent = "Login";
+                cadastro.textContent = "Cadastro";
+                prestarservicoo.textContent = "Prestar Servico";
+                solicitarservicoo.textContent = "Solicitar Servico";
+                profile.textContent = "Perfil";
+                account.textContent = "Alterar Conta";
+                profiledata.textContent = "Alterar dados do perfil";
+                leave.textContent = "Sair";
+                precisando.textContent = "Esta Precisando de algum serviço domestico, nos da Service.in oferecemos esses serviços, solicite aqui";
+                btnsolicitar.textContent = "SOLICITAR SERVICO";
+                langLabel.textContent = 'Portugues:';
+            }
+        });
+        let trilho = document.getElementById('trilho');
+let body = document.querySelector('body');
+let central = document.querySelector('.central');
+let rodape = document.querySelector('.rodape');
+let chatContainer = document.querySelector('.chat-container');
+
+trilho.addEventListener('click', () => {
+  body.classList.toggle('dark');
+  central.classList.toggle('dark');
+  rodape.classList.toggle('dark');
+  chatContainer.classList.toggle('dark');
+        })
+
 </script>
 
 </html>
