@@ -31,393 +31,403 @@ if (isset($_POST['submit'])) {
   <link rel="stylesheet" type="text/css" href="public/css.css" />
 
   <style>
-    .btnsair {
-      padding: 10px;
-      background-color: white;
-      color: black;
-      text-decoration: none;
-      border-radius: 10px;
-    }
+    @media (max-width: 600px) {
+      .contrate{
+        height: 400px;
+      } 
+      .txtcentral{
+        
+        font-size: 12px;
+      }
+      }
 
-    .chat-button {
-      position: fixed;
-      /* Mantém o botão fixo na tela */
-      bottom: 20px;
-      /* Distância do fundo */
-      right: 20px;
-      /* Distância da direita */
-      background-color: #238E68;
-      /* Cor de fundo */
-      color: white;
-      /* Cor do texto */
-      border: none;
-      /* Sem borda */
-      padding: 15px;
-      /* Espaçamento interno */
-      border-radius: 50%;
-      /* Forma do botão (circular) */
-      cursor: pointer;
-      /* Cursor ao passar o mouse */
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      /* Sombra leve */
-      z-index: 1000;
-      /* Garante que esteja acima de outros elementos */
-    }
+      .btnsair {
+        padding: 10px;
+        background-color: white;
+        color: black;
+        text-decoration: none;
+        border-radius: 10px;
+      }
 
-    /* Estilos do ícone (font awesome usado como exemplo) */
-    .chat-button i {
-      font-size: 24px;
-      /* Tamanho do ícone */
-    }
+      .chat-button {
+        position: fixed;
+        /* Mantém o botão fixo na tela */
+        bottom: 20px;
+        /* Distância do fundo */
+        right: 20px;
+        /* Distância da direita */
+        background-color: #238E68;
+        /* Cor de fundo */
+        color: white;
+        /* Cor do texto */
+        border: none;
+        /* Sem borda */
+        padding: 15px;
+        /* Espaçamento interno */
+        border-radius: 50%;
+        /* Forma do botão (circular) */
+        cursor: pointer;
+        /* Cursor ao passar o mouse */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        /* Sombra leve */
+        z-index: 1000;
+        /* Garante que esteja acima de outros elementos */
+      }
 
-    /* Estilos do contêiner do chat */
-    .chat-container {
-      display: none;
-      /* Inicialmente oculto */
-      position: fixed;
-      bottom: 80px;
-      /* Distância do fundo */
-      right: 20px;
-      /* Distância da direita */
-      width: 300px;
-      /* Largura do chat */
-      background-color: #f9f9f9;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      border-radius: 5px;
-      z-index: 999;
-      /* Um nível abaixo do botão */
-    }
+      /* Estilos do ícone (font awesome usado como exemplo) */
+      .chat-button i {
+        font-size: 24px;
+        /* Tamanho do ícone */
+      }
 
-    /* Estilos do cabeçalho do chat */
-    .chat-header {
-      background-color: #238E68;
-      color: white;
-      padding: 10px;
-      border-top-left-radius: 5px;
-      border-top-right-radius: 5px;
-    }
+      /* Estilos do contêiner do chat */
+      .chat-container {
+        display: none;
+        /* Inicialmente oculto */
+        position: fixed;
+        bottom: 80px;
+        /* Distância do fundo */
+        right: 20px;
+        /* Distância da direita */
+        width: 300px;
+        /* Largura do chat */
+        background-color: #f9f9f9;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+        z-index: 999;
+        /* Um nível abaixo do botão */
+      }
 
-    /* Estilos do corpo do chat */
-    .chat-body {
-      padding: 20px;
-      height: 300px;
-      /* Altura do corpo do chat */
-      overflow-y: auto;
-      /* Scroll vertical, se necessário */
+      /* Estilos do cabeçalho do chat */
+      .chat-header {
+        background-color: #238E68;
+        color: white;
+        padding: 10px;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+      }
 
-    }
+      /* Estilos do corpo do chat */
+      .chat-body {
+        padding: 20px;
+        height: 300px;
+        /* Altura do corpo do chat */
+        overflow-y: auto;
+        /* Scroll vertical, se necessário */
 
-    /* Estilos do campo de entrada do chat */
-    .chat-input {
-      width: calc(100% - 20px);
-      padding: 10px;
-      border: 1px solid #ddd;
-      border-radius: 5px;
-      margin: 10px;
-    }
+      }
 
-    /* Estilos do botão de enviar do chat */
-    .chat-send-button {
-      background-color: #238E68;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 5px;
-      cursor: pointer;
-      margin-bottom: 10px;
-      margin-left: 10px;
+      /* Estilos do campo de entrada do chat */
+      .chat-input {
+        width: calc(100% - 20px);
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        margin: 10px;
+      }
 
-    }
+      /* Estilos do botão de enviar do chat */
+      .chat-send-button {
+        background-color: #238E68;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-bottom: 10px;
+        margin-left: 10px;
 
-    .contrate {
-      background-color: gray;
-      display: flex;
-      background-image: url('img/servico-encanador-bauru.jpg');
-      background-size: cover;
-      /* Faz a imagem cobrir toda a área da div */
-      background-position: center;
-      /* Centraliza a imagem */
-      background-repeat: no-repeat;
-      border-radius: 18px;
+      }
 
-    }
+      .contrate {
+        background-color: gray;
+        display: flex;
+        background-image: url('img/servico-encanador-bauru.jpg');
+        background-size: cover;
+        /* Faz a imagem cobrir toda a área da div */
+        background-position: center;
+        /* Centraliza a imagem */
+        background-repeat: no-repeat;
+        border-radius: 18px;
 
-
-    .central {
-      display: flex;
-    }
-
-    .imgcentral {
-      margin-top: -7vh;
-      width: 50.5vw;
-
-    }
-
-    .acentral {
-      padding: 8px;
-      background-color: #238E68;
-      text-decoration: none;
-      color: black;
-      border-radius: 12px;
-      width: 10vw;
-      font-weight: 700;
-      position: absolute;
-      top: 80%;
-      left: 65%;
-    }
-
-    .txtcentral {
-      position: absolute;
-      top: 65%;
-      left: 65%;
-      color: white;
-    }
-
-    .a-nav {
-      color: #ffffff;
-      text-decoration: none;
-      transition: 0.3s;
-    }
-
-    .a-nav:hover {
-      opacity: 0.7;
-    }
-
-    .nav-list {
-      list-style: none;
-      display: flex;
-
-    }
-
-    .nav-list li {
-      letter-spacing: 3px;
-      margin-left: 32px;
-    }
-
-    .btnhead {
-      color: white;
-      font-size: 18px;
-      text-decoration: none;
-      transition: 0.3s;
-    }
-
-    .btnhead:hover {
-      opacity: 0.7;
-    }
-
-    .menu {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      margin-left: 70px;
-      margin-top: -13px;
-
-    }
-
-    .menu-item {
-      position: relative;
-      display: inline-block;
-    }
-
-    .menu-link {
-      display: block;
-      padding: 15px 20px;
-      text-decoration: none;
-      color: #fff;
-      background-color: grey;
-      border-radius: 12px;
-      font-weight: 700
-    }
-
-    .menu-link:hover {
-      background-color: #555;
-    }
-
-    .submenu {
-      display: none;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      background-color: #333;
-      min-width: 160px;
-      z-index: 1;
-    }
-
-    .submenu li {
-      border-bottom: 1px solid #444;
-    }
-
-    .submenu li:last-child {
-      border-bottom: none;
-    }
-
-    .submenu a {
-      display: block;
-      padding: 10px 15px;
-      color: #fff;
-      text-decoration: none;
-    }
-
-    .submenu a:hover {
-      background-color: #238E68;
-    }
-
-    .menu-item:hover .submenu {
-      display: block;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-
-    }
-
-    .rodape {
-      background-color: #000;
-      height: 270px;
-      width: 100%;
-      padding-bottom: 2vh;
-      padding: 0 6vh;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-    }
-
-    .paragrafro {
-      color: white;
-      font-size: 14px;
-      margin-top: 30px;
-    }
-
-    .compartilhe {
-      margin-top: 2rem;
-      margin-bottom: 5rem;
-      border-radius: 30px;
-      padding: 1rem;
-      font-size: 15px;
-      transition: 0.5s;
-      font-weight: 700;
-      margin-left: 730px;
-    }
-
-    .redes {
-
-      margin-left: 700px;
-    }
-
-    .compartilhe:hover {
-      transition: 0.5s;
-      background-color: gray;
-      color: white
-    }
-
-    .switch {
-      position: relative;
-      display: inline-block;
-      width: 60px;
-      height: 34px;
-    }
-
-    .switch input {
-      opacity: 0;
-      width: 0;
-      height: 0;
-    }
-
-    .slider {
-      position: absolute;
-      cursor: pointer;
-      top: -5px;
-      left: 0;
-      right: -20px;
-      bottom: 0;
-      background-color: #ccc;
-      transition: .4s;
-      border-radius: 34px;
-    }
-
-    .slider:before {
-      position: absolute;
-      content: "";
-      height: 26px;
-      width: 26px;
-      border-radius: 50%;
-      left: 4px;
-      bottom: 4px;
-      background-color: white;
-      transition: .4s;
-    }
-
-    input:checked+.slider {
-      background-color: #2196F3;
-    }
-
-    input:checked+.slider:before {
-      transform: translateX(26px);
-    }
-
-    .language-label {
-      display: flex;
-      align-items: center;
-      margin-bottom: 20px;
-
-    }
-
-    .language-label span {
-      margin-right: 10px;
-    }
-
-    .trilho {
-      width: 90px;
-      height: 40px;
-      background-color: #4d4d4d;
-      border-radius: 150px;
-      position: relative;
-      cursor: pointer;
-      margin-top: -7px;
-
-    }
-
-    .trilho .indicador {
-      width: 40px;
-      height: 40px;
-      background-color: #000;
-      border-radius: 50%;
-      transform: scale(.9);
-      position: absolute;
-      left: 0;
-      transition: .5s;
-    }
+      }
 
 
-    .trilho.dark {
-      background-color: #c3c3c3;
-    }
+      .central {
+        display: flex;
+      }
 
-    .trilho.dark .indicador {
-      left: 50px;
-      background-color: #fff;
-    }
+      .imgcentral {
+        margin-top: -7vh;
+        width: 50.5vw;
 
-    body.dark {
-      background-color: #121212;
-      color: #ffffff;
-    }
+      }
 
-    .central.dark {
-      background-color: #1e1e1e;
-    }
+      .acentral {
+        padding: 8px;
+        background-color: #238E68;
+        text-decoration: none;
+        color: black;
+        border-radius: 12px;
+        width: 10vw;
+        font-weight: 700;
+        position: absolute;
+        top: 80%;
+        left: 65%;
+      }
 
-    .rodape.dark {
-      background-color: #1e1e1e;
-    }
+      .txtcentral {
+        position: absolute;
+        top: 65%;
+        left: 65%;
+        color: white;
+      }
 
-    .chat-container.dark {
-      background-color: #2c2c2c;
-    }
+      .a-nav {
+        color: #ffffff;
+        text-decoration: none;
+        transition: 0.3s;
+      }
+
+      .a-nav:hover {
+        opacity: 0.7;
+      }
+
+      .nav-list {
+        list-style: none;
+        display: flex;
+
+      }
+
+      .nav-list li {
+        letter-spacing: 3px;
+        margin-left: 32px;
+      }
+
+      .btnhead {
+        color: white;
+        font-size: 18px;
+        text-decoration: none;
+        transition: 0.3s;
+      }
+
+      .btnhead:hover {
+        opacity: 0.7;
+      }
+
+      .menu {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        margin-left: 70px;
+        margin-top: -13px;
+
+      }
+
+      .menu-item {
+        position: relative;
+        display: inline-block;
+      }
+
+      .menu-link {
+        display: block;
+        padding: 15px 20px;
+        text-decoration: none;
+        color: #fff;
+        background-color: grey;
+        border-radius: 12px;
+        font-weight: 700
+      }
+
+      .menu-link:hover {
+        background-color: #555;
+      }
+
+      .submenu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        background-color: #333;
+        min-width: 160px;
+        z-index: 1;
+      }
+
+      .submenu li {
+        border-bottom: 1px solid #444;
+      }
+
+      .submenu li:last-child {
+        border-bottom: none;
+      }
+
+      .submenu a {
+        display: block;
+        padding: 10px 15px;
+        color: #fff;
+        text-decoration: none;
+      }
+
+      .submenu a:hover {
+        background-color: #238E68;
+      }
+
+      .menu-item:hover .submenu {
+        display: block;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+
+      }
+
+      .rodape {
+        background-color: #000;
+        height: 270px;
+        width: 100%;
+        padding-bottom: 2vh;
+        padding: 0 6vh;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .paragrafro {
+        color: white;
+        font-size: 14px;
+        margin-top: 30px;
+      }
+
+      .compartilhe {
+        margin-top: 2rem;
+        margin-bottom: 5rem;
+        border-radius: 30px;
+        padding: 1rem;
+        font-size: 15px;
+        transition: 0.5s;
+        font-weight: 700;
+        margin-left: 730px;
+      }
+
+      .redes {
+
+        margin-left: 700px;
+      }
+
+      .compartilhe:hover {
+        transition: 0.5s;
+        background-color: gray;
+        color: white
+      }
+
+      .switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+      }
+
+      .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+
+      .slider {
+        position: absolute;
+        cursor: pointer;
+        top: -5px;
+        left: 0;
+        right: -20px;
+        bottom: 0;
+        background-color: #ccc;
+        transition: .4s;
+        border-radius: 34px;
+      }
+
+      .slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        border-radius: 50%;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        transition: .4s;
+      }
+
+      input:checked+.slider {
+        background-color: #2196F3;
+      }
+
+      input:checked+.slider:before {
+        transform: translateX(26px);
+      }
+
+      .language-label {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+
+      }
+
+      .language-label span {
+        margin-right: 10px;
+      }
+
+      .trilho {
+        width: 90px;
+        height: 40px;
+        background-color: #4d4d4d;
+        border-radius: 150px;
+        position: relative;
+        cursor: pointer;
+        margin-top: -7px;
+
+      }
+
+      .trilho .indicador {
+        width: 40px;
+        height: 40px;
+        background-color: #000;
+        border-radius: 50%;
+        transform: scale(.9);
+        position: absolute;
+        left: 0;
+        transition: .5s;
+      }
+
+
+      .trilho.dark {
+        background-color: #c3c3c3;
+      }
+
+      .trilho.dark .indicador {
+        left: 50px;
+        background-color: #fff;
+      }
+
+      body.dark {
+        background-color: #121212;
+        color: #ffffff;
+      }
+
+      .central.dark {
+        background-color: #1e1e1e;
+      }
+
+      .rodape.dark {
+        background-color: #1e1e1e;
+      }
+
+      .chat-container.dark {
+        background-color: #2c2c2c;
+      }
   </style>
 </head>
 
@@ -431,7 +441,7 @@ if (isset($_POST['submit'])) {
 
     <div style="display: flex; margin-top: 30px; justify-content: space-around; margin-left: -0px;">
 
-      
+
       <div><a id="login" class="btnhead" href="login.php" style="color: white; font-size: 18px; text-decoration: none;">Login</a></div>
       <div> <a id="cadastro" class="btnhead" href="cadastro.php" style="color: white; font-size: 18px; text-decoration: none;">Cadastre-se</a> </div>
       <div> <a id="prestarservicoo" class="btnhead" href="prestar.php" style="color: Black; font-size: 18px; text-decoration: none;">Prestar Serviços</a></div>
