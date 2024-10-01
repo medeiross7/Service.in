@@ -14,24 +14,10 @@ if(isset($_POST['submit'])){
     $data_nascimento = $_POST['data_nascimento'];
     $area_atuacao = isset($_POST['servico']) ? $_POST['servico'] : ''; // capturar a área de atuação
 
-    // Lidar com o upload da imagem
-    $destino = NULL; // valor padrão, caso o upload falhe
-    if (isset($_FILES['arquivo']) && $_FILES['arquivo']['error'] == 0) {
-        $arquivo_tmp = $_FILES['arquivo']['tmp_name'];
-        $nome_arquivo = $_FILES['arquivo']['name'];
-        $extensao = strtolower(pathinfo($nome_arquivo, PATHINFO_EXTENSION));
-        
-        // Validar extensões e mover o arquivo
-        $validas = ['jpg', 'jpeg', 'png', 'gif'];
-        if (in_array($extensao, $validas)) {
-            $destino = 'uploads/' . uniqid() . '.' . $extensao; // renomear o arquivo para evitar conflito
-            move_uploaded_file($arquivo_tmp, $destino);
-        }
-    }
 
     // Inserir os dados no banco de dados, incluindo o caminho da imagem
-    $stmt = $mysqli->prepare("INSERT INTO cadastro_colaborador (nome, telefone, email, sobre, estado, cidade, endereco, senha, sexo, data_nascimento, area_atuacao, arquivo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param('ssssssssssss', $nome, $telefone, $email, $sobre, $estado, $cidade, $endereco, $senha, $sexo, $data_nascimento, $area_atuacao, $destino);
+    $stmt = $mysqli->prepare("INSERT INTO cadastro_colaborador (nome, telefone, email, sobre, estado, cidade, endereco, senha, sexo, data_nascimento, area_atuacao) VALUES (:nome, :telefone, :email, :sobre, :estado, :cidade, :endereco, :senha, :sexo, :data_nascimento, :area_atuacao)");
+    $stmt->bind_param('ssssssssssss', $nome, $telefone, $email, $sobre, $estado, $cidade, $endereco, $senha, $sexo, $data_nascimento, $area_atuacao);
     
     if ($stmt->execute()) {
         header('Location: sistema.php');

@@ -77,7 +77,7 @@
 
         <div>
             <div>
-                <img class="img-longa" src="Rectangle 16.png" alt="">
+                <img class="img-longa" src="img/Rectangle 16.png" alt="">
             </div>
 
             <div class="qm">

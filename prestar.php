@@ -15,9 +15,6 @@
     <title>Document</title>
     <link rel="stylesheet" href="prestar.css">
     <style>
-        body{
-            margin: 0;
-        }
         svg{
             height: 3vh;
             width: 3vh;
@@ -99,9 +96,11 @@
     </div>
     <div style="display: flex; margin-top: 30px; justify-content: space-around; margin-left: -200px;">
         <div></div>
+        <div> <a class="btnhead" href="cadastro.php" style="color: white; font-size: 18px; text-decoration: none;">Cadastre-se</a> </div>
         <div> <a class="btnhead" href="prestar.php" style="color: Black; font-size: 18px; text-decoration: none;">Prestar Serviços</a></div>
         <div> <a class="btnhead" href="solicitar.php" style="color: Black; font-size: 18px; text-decoration: none;">Solicitar Serviço</a></div>
         <div> <a class="btnhead" href="sobre.php" style="color: Black; font-size: 18px; text-decoration: none;">Sobre</a></div>
+        <div><a href="login.php" style="color: white; font-size: 18px; text-decoration: none;">Login</a></div>
     </div>
 
     <main>
