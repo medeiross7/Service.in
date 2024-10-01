@@ -448,8 +448,6 @@
           </li>
         </ul>
       </div>
-      <div><a id="login" class="btnhead" href="login.php" style="color: white; font-size: 18px; text-decoration: none;">Login</a></div>
-      <div> <a id="cadastro" class="btnhead" href="cadastro.php" style="color: white; font-size: 18px; text-decoration: none;">Cadastre-se</a> </div>
       <div> <a id="prestarservicoo" class="btnhead" href="prestar.php" style="color: Black; font-size: 18px; text-decoration: none;">Prestar Serviços</a></div>
       <div> <a id="solicitarservicoo" class="btnhead" href="solicitar.php" style="color: Black; font-size: 18px; text-decoration: none;">Solicitar Serviço</a></div>
       <div class="language-label">
