@@ -1,8 +1,9 @@
 <?php
-if (isset($_POST['submit'])) {
-    include_once('conexao.php'); // Inclua o arquivo de conexão
 
-    // Coleta os dados do formulário
+if(isset($_POST['submit'])){
+
+
+   include_once('conexao.php');
     $nome = $_POST['nome'];
     $email = $_POST['email'];
     $telefone = $_POST['telefone'];
@@ -13,33 +14,9 @@ if (isset($_POST['submit'])) {
     $endereco = $_POST['endereco'];
     $senha = $_POST['senha'];
 
-    try {
-        // Prepare a consulta SQL
-        $sql = "INSERT INTO usuarios (nome, email, telefone, sexo, data_nascimento, cidade, estado, endereco, senha) 
-                VALUES (:nome, :email, :telefone, :genero, :data_nascimento, :cidade, :estado, :endereco, :senha)";
-        $stmt = $pdo->prepare($sql);
+    $result = mysqli_query($mysqli, "INSERT INTO usuarios(nome, email, telefone,sexo, data_nascimento, cidade, estado, endereco, senha) VALUES('$nome', '$email', '$telefone','$genero','$data_nascimento','$cidade','$estado','$endereco','$senha')");
 
-        // Bind dos parâmetros
-        $stmt->bindParam(':nome', $nome);
-        $stmt->bindParam(':email', $email);
-        $stmt->bindParam(':telefone', $telefone);
-        $stmt->bindParam(':genero', $genero);
-        $stmt->bindParam(':data_nascimento', $data_nascimento);
-        $stmt->bindParam(':cidade', $cidade);
-        $stmt->bindParam(':estado', $estado);
-        $stmt->bindParam(':endereco', $endereco);
-        $stmt->bindParam(':senha', $senha);
-
-        // Execute a consulta
-        $stmt->execute();
-
-        // Redireciona para a página de login
-        header('Location: login.php');
-        exit();
-    } catch (PDOException $e) {
-        // Exibe uma mensagem de erro se a consulta falhar
-        echo "Erro ao inserir os dados: " . $e->getMessage();
-    }
+    header('Location: login.php');
 }
 ?>
 
