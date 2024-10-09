@@ -1,8 +1,8 @@
 <?php
 if (isset($_POST['submit'])) {
-    include_once('conexao.php'); // Inclua o arquivo de conexão
+    include_once('conexao.php'); 
 
-    // Coleta os dados do formulário
+    
     $nome = $_POST['nome'];
     $email = $_POST['email'];
     $telefone = $_POST['telefone'];
@@ -14,12 +14,12 @@ if (isset($_POST['submit'])) {
     $senha = $_POST['senha'];
 
     try {
-        // Prepare a consulta SQL
+        
         $sql = "INSERT INTO usuarios (nome, email, telefone, sexo, data_nascimento, cidade, estado, endereco, senha) 
                 VALUES (:nome, :email, :telefone, :genero, :data_nascimento, :cidade, :estado, :endereco, :senha)";
         $stmt = $pdo->prepare($sql);
 
-        // Bind dos parâmetros
+        
         $stmt->bindParam(':nome', $nome);
         $stmt->bindParam(':email', $email);
         $stmt->bindParam(':telefone', $telefone);
@@ -30,14 +30,14 @@ if (isset($_POST['submit'])) {
         $stmt->bindParam(':endereco', $endereco);
         $stmt->bindParam(':senha', $senha);
 
-        // Execute a consulta
+        
         $stmt->execute();
 
-        // Redireciona para a página de login
+        
         header('Location: login.php');
         exit();
     } catch (PDOException $e) {
-        // Exibe uma mensagem de erro se a consulta falhar
+        
         echo "Erro ao inserir os dados: " . $e->getMessage();
     }
 }
