@@ -59,76 +59,111 @@ if (isset($_POST['submit'])) {
 </head>
 
 <style>
-body{
+    body {
         font-family: Arial, Helvetica, sans-serif;
         background-color: #238e68;
+        margin: 0;
+        display: flex;
 
-        }
-        .box{
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: rgba(0, 0, 0, 0.6);
-            padding: 15px;
-            border-radius: 15px;
-            width: 20%;
-            color: white;
-        }
-        fieldset{
-            border: 3px solid #238e68;
-        }
-        legend{
-            border: 1px solid #238e68;
-            padding: 10px;
-            text-align: center;
-            background-color: #238e68;
-            border-radius: 8px;
-        }
-        .inputBox{
-            position: relative;
-        }
-        .inputUser{
-            background: none;
-            border: none;
-            border-bottom: 1px solid white;
-            outline: none;
-            color: white;
-            font-size: 15px;
-            width: 100%;
-            letter-spacing: 2px;
-        }
-        .labelInput{
-            position: absolute;
-            top: 0px;
-            left: 0px;
-            pointer-events:none;
-            transition: .5s;
-        }
-        .inputUser:focus ~ .labelInput,
-        .inputUser:valid ~ .labelInput{
-            top: -20px;
-            font-size: 12px;
-            color: dodgerblue;
-        }
-        #data_nascimento{
-            border: none;
-            padding: 8px;
-            border-radius: 10px;
-            outline: none;
-            font-size: 15px;
-        }
-        #submit{
-            background-color: #238e68;
-            border:none;
-            width: 100%;
-            padding: 15px;
-            color: white;
-            font-size: 15px;
-            cursor: pointer;
-            border-radius: 10px;
+    }
+
+    .box {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: rgba(0, 0, 0, 0.6);
+        padding: 15px;
+        border-radius: 15px;
+        width: 20%;
+        color: white;
+    }
+    form{
+        width: 44vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    fieldset {
+        border: 3px solid white;
+        width: 20vw;
         
-        }
+    }
+
+    legend {
+        border: 1px solid #238e68;
+        padding: 10px;
+        text-align: center;
+        background-color: #238e68;
+        border-radius: 8px;
+    }
+
+    .inputBox {
+        position: relative;
+    }
+
+    .inputUser {
+        background: none;
+        border: none;
+        border-bottom: 1px solid white;
+        outline: none;
+        color: white;
+        font-size: 15px;
+        width: 100%;
+        letter-spacing: 2px;
+    }
+
+    .labelInput {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        pointer-events: none;
+        transition: .5s;
+    }
+
+    .inputUser:focus~.labelInput,
+    .inputUser:valid~.labelInput {
+        top: -20px;
+        font-size: 12px;
+        color: dodgerblue;
+    }
+
+    #data_nascimento {
+        border: none;
+        padding: 8px;
+        border-radius: 10px;
+        outline: none;
+        font-size: 15px;
+    }
+
+    #submit {
+        background-color: #238e68;
+        border: none;
+        width: 60%;
+        padding: 10px;
+        color: black;
+        font-size: 15px;
+        cursor: pointer;
+        border-radius: 10px;
+        background-color: whitesmoke;
+        margin-top: 8px;
+
+    }
+
+    .div2 {
+        background-color: whitesmoke;
+        height: 100vh;
+        width: 59vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .div2 img {
+        width: 40vw;
+        height: 80vh;
+
+    }
 </style>
 
 <body>
@@ -209,7 +244,7 @@ body{
         </fieldset>
     </form>
     <div class="div2">
-
+        <img src="img/image 4.png" alt="">
     </div>
 </body>
 
