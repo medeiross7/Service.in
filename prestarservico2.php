@@ -1,119 +1,267 @@
 <?php
-    include_once('conexao.php');
+include_once('conexao.php');
 
-    $msg = false;
+$msg = false;
 
-    if(isset($_FILES['arquivo'])){
-        $extensao =  strtolower(substr($_FILES['arquivo']['name'], -4));
-        $novo_nome = md5(time()). $extensao;
-        $diretorio = "img/";
+if (isset($_FILES['arquivo']) && isset($_POST['plano'])) {
+    $extensao = strtolower(substr($_FILES['arquivo']['name'], -4)); 
+    $novo_nome = md5(time()) . $extensao; 
+    $diretorio = "img/"; 
 
-        move_uploaded_file($_FILES['arquivo']['tmp_name'], $diretorio.$novo_nome);
-        $sql_code = "INSERT INTO arquivo (id, arquivo, data) VALUES(null,'$novo_nome', NOW())";
-        if($mysqli->query($sql_code)){
-            $msg = "Arquivo enviado com sucesso!";
-        }
-        else{
-            $msg = "Falha ao enviar o Arquivo";
-        }
+    move_uploaded_file($_FILES['arquivo']['tmp_name'], $diretorio . $novo_nome);
+
+    $plano = $_POST['plano'];
+
+    $sql_code = "INSERT INTO cadastro_colaborador (arquivo, plano) VALUES ('$novo_nome', '$plano')";
+
+    if ($mysqli->query($sql_code)) {
+        
+        header('Location: sistema.php');
+        exit(); 
+    } else {
+        $msg = "Falha ao enviar o perfil.";
     }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        .box{
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: rgba(0, 0, 0, 0.6);
-            padding: 15px;
-            border-radius: 15px;
-            width: 20%;
-            color: white;
+        li {
+            list-style-type: none;
+            margin-left: -4vh;
+            margin-top: 0.5vh;
+            font-size: 2.2vh;
         }
-        fieldset{
-            border: 3px solid #238e68;
-        }
-        legend{
-            border: 1px solid #238e68;
-            padding: 10px;
-            text-align: center;
-            background-color: #238e68;
-            border-radius: 8px;
-        }
-        .termos{
-            padding: 10px;
-            background-color: grey;
-            width: 350px;
-            text-align: center;
-            text-decoration: none;
-            color: white;
-        }
-        .divtermos{
-            width: 350px;
-            height: 40px;
+
+        body {
+            background-color: #238E68;
             display: flex;
-            align-items: center;
+
         }
-        svg{
-            color: white;
-            
+
+        .div-mae {
+            margin-top: 5%;
+            background-color: #D9D9D9;
+            height: 80%;
+            width: 60%;
+            border-radius: 4vh;
+            text-align: center;
+            padding: 2vh 4vh 0vh 4vh;
+
         }
-        #submit{
-            padding: 8px;
-            background-color: grey;
-            border: none;
-            border-radius: 8px;
-            color: white;
+
+        .quase {
+            font-size: 6vh;
+            margin-bottom: 2vh;
+
+        }
+
+        .escolha {
+            margin-left: -56%;
+            font-size: 4vh;
+        }
+
+        .planos {
+            margin-bottom: 4vh;
+            font-size: 4vh;
+            margin-top: 10px;
+        }
+
+        .card {
+            margin: 0vh 2vh 0vh 2vh;
+            width: 30%;
+            height: 100%;
+            padding-top: 2vh;
+            padding-bottom: 2.5vh;
+            background-color: white;
+            text-align: left;
+        }
+
+        .bronze {
+            font-size: 5vh;
+            color: #F8832E;
+            margin-left: 2.5vh;
+        }
+
+        .prata {
+            font-size: 5vh;
+            color: #90A3BF;
+            margin-left: 2.5vh;
+        }
+
+        .ouro {
+            font-size: 5vh;
+            color: #FFB800;
+            margin-left: 2.5vh;
+        }
+
+        .oque {
+            margin-left: 2.5vh;
+        }
+
+        .linha {
+            width: 100%;
+            border-bottom: 1px solid #000000;
+
+        }
+
+        .verde {
+            color: #238E68;
+            font-weight: bolder;
+        }
+
+        .div-cards {
+            display: flex;
+
+        }
+
+        .inpt {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .inp-text {
+            box-shadow: 0 0 0 0;
+            border: 0 none;
+            outline: 0;
+            width: 30%;
+        }
+
+        .fts {
+            margin-top: 2%;
+            margin-left: -50%;
+            margin-bottom: 2%;
+        }
+
+        .pronto {
+            padding: 1vh 3.3vh 1vh 3.3vh;
+            text-decoration: none;
+            background-color: white;
+            color: black;
+            border-radius: 10px;
+            box-shadow: 0 0 0 0;
+            border: 0 none;
+            outline: 0;
+            font-size: 2.5vh;
+            height: 5vh;
+            margin-top: 2vh;
+            margin-left: 48vw;
+
+        }
+
+        .d-btn {
+            position: absolute;
+            margin: 43% 0% 0% 63%;
         }
     </style>
+
+
 </head>
+
+
 <body style="font-family: Arial, Helvetica, sans-serif;">
-    <?php
-        if($msg != false) {
-            echo "<p> $msg </p>";
-        }
-    ?>
-    <div class="box">
-        <form action="index.php" method="POST" enctype="multipart/form-data">
-            <fieldset>
-                <legend>
-                    <b>
-                       Quase Tudo Pronto!
-                    </b>
-                </legend>
-                <br>
-                <div class="inputBox">
-                    <label for="servico" class="labelInput">Foto de Perfil:</label><br>
-                    <input type="hidden" name="arquivo" value="4194304" />
-                    <br>
-                    <input required name="arquivo" style="background-color: grey; width: 350px;" type="file" />   
-                    
+
+    <div class="div-mae">
+
+        <div class="quase">
+            Quase Tudo Pronto!
+        </div>
+
+        <div class="escolha">
+            Escolha sua Foto de Perfil
+        </div>
+        <form action="" method="POST" enctype="multipart/form-data">
+            <div class="inputBox">
+                <label for="arquivo" class="labelInput">Foto de Perfil:</label><br>
+                <input type="file" name="arquivo" required accept="image/png, image/jpeg"
+                    style="background-color: grey; width: 350px;"><br><br>
+            </div>
+
+
+
+            <div class="planos">
+                Planos Disponiveis
+            </div>
+
+            <div class="div-cards">
+
+                <div class="card">
+                    <div class="bronze">Bronze</div>
+                    <div class="oque">Oque vai ser <br> Disponipilizado?</div>
+                    <h1 class="linha"></h1>
+                    <ul>
+                        <li>Prioridade de Serviços.</li>
+                        <li>Alterar Foto de Perfil.</li>
+                        <li>Alterar Sobre.</li>
+                        <li>Ter Redes Sociais no Perfil.</li>
+                        <li class="verde">Adicionar Fotos de Serviços.</li>
+                    </ul>
                 </div>
-                
-                <br><br>
-                <div class="divtermos">
-                    <a class="termos" href="">Termos e condições
-                    </a>
-                    <a style="background-color: grey; height: 40px; display: flex; align-items: center;" href=""><svg width="20px" height="20px" viewBox="0 0 24 24" fill="none"><title>Chevron right small</title><path d="m16.9 12-4.6 6H8.5l4.6-6-4.6-6h3.8l4.6 6Z" fill="currentColor"></path>
-                    <title>Chevron right small</title>
-                    <path d="m16.9 12-4.6 6H8.5l4.6-6-4.6-6h3.8l4.6 6Z" fill="currentColor"></path>
-                    </svg></a>
-                    
-                    
-                    
+
+                <div class="card">
+                    <div class="prata">Prata</div>
+                    <div class="oque">Oque vai ser <br> Disponipilizado?</div>
+                    <h1 class="linha"></h1>
+                    <ul>
+                        <li>Prioridade de Serviços.</li>
+                        <li>Alterar Foto de Perfil.</li>
+                        <li class="verde">Alterar Sobre.</li>
+                        <li class="verde">Ter Redes Sociais no Perfil.</li>
+                        <li class="verde">Adicionar Fotos de Serviços.</li>
+                    </ul>
                 </div>
-                <br><br>
-               
-                
-                <input type="submit" name="submit" id="submit" value="Concluido!" >
-            </fieldset>
+
+                <div class="card">
+                    <div class="Ouro">Ouro</div>
+                    <div class="oque">Oque vai ser <br> Disponipilizado?</div>
+                    <h1 class="linha"></h1>
+                    <ul>
+                        <li class="verde">Prioridade de Serviços.</li>
+                        <li class="verde">Alterar Foto de Perfil.</li>
+                        <li class="verde">Alterar Sobre.</li>
+                        <li class="verde">Ter Redes Sociais no Perfil.</li>
+                        <li class="verde">Adicionar Fotos de Serviços.</li>
+                    </ul>
+                </div>
+
+            </div>
+            <div class="inpt">
+            <label for="bronze"></label>
+            <input type="radio" id="bronze" name="plano" value="bronze" required>
+
+            <label for="prata"></label>
+            <input type="radio" id="prata" name="plano" value="prata" required>
+
+            <label for="ouro"></label>
+            <input type="radio" id="ouro" name="plano" value="ouro" required>
+        </div>
+            <input class="pronto" type="submit" name="submit" value="Concluido !">
         </form>
+        <!-- checkbox -->
+        
+
+        
+
+
     </div>
+
+
+
+    
+
+        
+
+   
+
+
+
+
+
 </body>
+
 </html>
