@@ -1,28 +1,28 @@
 <?php
-    session_start();
-   // print_r($_SESSION);
-    if((!isset($_SESSION['email'])== true) and (!isset($_SESSION['senha']) == true)){
-        header('Location: login.php');
-    }
-    $logado = $_SESSION['email']; //email conectado na sessao, atentar na hora de fazer o layout
+session_start();
+// print_r($_SESSION);
+if ((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true)) {
+  header('Location: login.php');
+}
+$logado = $_SESSION['email']; //email conectado na sessao, atentar na hora de fazer o layout
 
-    if (isset($_POST['submit'])) {
-      include_once('conexao.php');
-    
-      $tema = $_POST['tema'];
-      $mensagem = $_POST['mensagem'];
-      $result = mysqli_query($mysqli, "INSERT INTO suporte(tema, mensagem) VALUES('$tema', '$mensagem')");
-    
-      if (!$result) {
-        die('Erro na query: ' . mysqli_error($mysqli));
-      }
-    
-      mysqli_close($mysqli);
-    
-      // Redirecionamento após inserção bem-sucedida
-      header('Location: index.php');
-      exit;
-    }
+if (isset($_POST['submit'])) {
+  include_once('conexao.php');
+
+  $tema = $_POST['tema'];
+  $mensagem = $_POST['mensagem'];
+  $result = mysqli_query($mysqli, "INSERT INTO suporte(tema, mensagem) VALUES('$tema', '$mensagem')");
+
+  if (!$result) {
+    die('Erro na query: ' . mysqli_error($mysqli));
+  }
+
+  mysqli_close($mysqli);
+
+  // Redirecionamento após inserção bem-sucedida
+  header('Location: index.php');
+  exit;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -308,7 +308,7 @@
     }
 
     .redes {
-      
+
       margin-left: 700px;
     }
 
@@ -532,11 +532,11 @@
         © 2024 Service.in Todos os direitos reservados. <br>
         Endereço: Rua Itajúba, 223, floresta, Belo Horizonte - MG, Brasil<br>E-mail: contato@exemplo.com.br <br><br><br><br><br>
 
-        Para mais informações, visite nossa pagina <a style=" color: white;" href="sobre.php">SOBRE NÓS</a>  ou entre em contato conosco.
-   
+        Para mais informações, visite nossa pagina <a style=" color: white;" href="sobre.php">SOBRE NÓS</a> ou entre em contato conosco.
+
       <p>
     </div>
-    <divl>
+    <div>
       <button class="compartilhe">Compartilhe</button>
       <p class="redes" style="color: white; font-family: Arial, Helvetica, sans-serif; font-weight: 700;">
         Encontre-Nos
@@ -545,8 +545,8 @@
       <a style="margin-right: 10px;" class="redes" href="https://web.whatsapp.com/" target="_blank"><img src="img/Vector.png"></a>
       <a style="margin-right: 10px;" href="https://www.instagram.com/" target="_blank"><img src="img/Vector (2).png"></a>
       <a style="margin-right: 10px;" href="https://github.com/" target="_blank"><img src="img/Social Icons (1).png"></a>
-      <a  href="https://br.linkedin.com/" target="_blank"><img src="img/Social Icons (2).png"></a>
-  </div>
+      <a href="https://br.linkedin.com/" target="_blank"><img src="img/Social Icons (2).png"></a>
+    </div>
 
   </div>
 

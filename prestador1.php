@@ -1,39 +1,38 @@
 <?php
-include_once('conexao.php');
-session_start(); // Inicia a sessão
 
-// Verifica se o usuário está logado
-if (!isset($_SESSION['id'])) {
-    echo "Usuário não encontrado.";
-    exit(); // Interrompe o processamento se o ID do usuário não estiver na sessão
-}
+include 'conexao.php';
 
-// Obtém o ID da sessão
-$id = $_SESSION['id'];
+$nome = "a"; // Pode vir de uma entrada de usuário, verifique a validação
 
-// Prepara a consulta para obter os dados do usuário
-$sql = "SELECT * FROM cadastro_colaborador WHERE id = 8";
-$stmt = $pdo->prepare($sql);
-$stmt->execute([$id]);
+try {
+    // Consulta única para pegar o usuário
+    $stmt = $pdo->prepare("SELECT * FROM cadastro_colaborador WHERE nome = :nome");
+    $stmt->bindParam(':nome', $nome, PDO::PARAM_STR);
+    $stmt->execute();
 
-// Busca os dados do usuário
-$user = $stmt->fetch(PDO::FETCH_ASSOC);
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-if ($user) {
-    // Protege contra ataques XSS ao escapar as variáveis
-    $nome = htmlspecialchars($user['nome']);
-    $telefone = htmlspecialchars($user['telefone']);
-    $email = htmlspecialchars($user['email']);
-    $sobre = htmlspecialchars($user['sobre']);
-    $estado = htmlspecialchars($user['estado']);
-    $cidade = htmlspecialchars($user['cidade']);
-    $endereco = htmlspecialchars($user['endereco']);
-    $sexo = htmlspecialchars($user['sexo']);
-    $data_nascimento = htmlspecialchars($user['data_nascimento']);
-    $area_atuacao = htmlspecialchars($user['area_atuacao']);
-    $arquivo = htmlspecialchars($user['arquivo']);
-} else {
-    echo "Usuário não encontrado.";
+    if ($user) {
+        // Protegendo dados ao exibir
+        $nome = htmlspecialchars($user['nome']);
+        $telefone = htmlspecialchars($user['telefone']);
+        $email = htmlspecialchars($user['email']);
+        $sobre = htmlspecialchars($user['sobre']);
+        $estado = htmlspecialchars($user['estado']);
+        $cidade = htmlspecialchars($user['cidade']);
+        $endereco = htmlspecialchars($user['endereco']);
+        $senha = htmlspecialchars($user['senha']);
+        $sexo = htmlspecialchars($user['sexo']);
+        $data_nascimento = htmlspecialchars($user['data_nascimento']);
+        $area_atuacao = htmlspecialchars($user['area_atuacao']);
+        $arquivo = htmlspecialchars($user['arquivo']);
+        $plano = htmlspecialchars($user['plano']);
+    } else {
+        echo "Usuário não encontrado.";
+    }
+} catch (PDOException $e) {
+    error_log($e->getMessage()); // Registro do erro
+    echo "Erro ao buscar o usuário.";
 }
 ?>
 <!DOCTYPE html>

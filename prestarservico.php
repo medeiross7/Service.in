@@ -1,14 +1,22 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+
 if (isset($_POST['submit'])) {
     include_once('conexao.php');
 
-    $extensao = strtolower(substr($_FILES['arquivo']['name'], -4)); 
-    $novo_nome = md5(time()) . $extensao; 
-    $diretorio = "img/"; 
+    if (isset($_FILES['profile_pic']) && $_FILES['profile_pic']['error'] == 0) {
+        $extensao = strtolower(substr($_FILES['profile_pic']['name'], -4));
+        $novo_nome = md5(time()) . $extensao;
+        $diretorio = "img/";
+        move_uploaded_file($_FILES['profile_pic']['tmp_name'], $diretorio . $novo_nome);
+        $arquivo = $novo_nome;
+    } else {
+        $arquivo = null; // ou algum valor padrão
+    }
 
-    move_uploaded_file($_FILES['arquivo']['tmp_name'], $diretorio . $novo_nome);
-
-    $plano = $_POST['plano'];
+    $plano = $_POST['plan'] ?? null;
 
     $nome = $_POST['nome'];
     $telefone = $_POST['telefone'];
@@ -20,8 +28,7 @@ if (isset($_POST['submit'])) {
     $senha = $_POST['senha'];
     $sexo = $_POST['sexo'];
     $data_nascimento = $_POST['data_nascimento'];
-    $area_atuacao = $_POST['area_atuacao'];
-    $arquivo = $novo_nome;  // Corrigido: agora $arquivo é igual a $novo_nome
+    $area_atuacao = isset($_POST['area_atuacao']) ? implode(", ", $_POST['area_atuacao']) : '';
 
     try {
         $sql = "INSERT INTO cadastro_colaborador (nome, telefone, email, sobre, estado, cidade, endereco, senha, sexo, data_nascimento, area_atuacao, arquivo, plano) 
@@ -39,290 +46,255 @@ if (isset($_POST['submit'])) {
         $stmt->bindParam(':sexo', $sexo);
         $stmt->bindParam(':data_nascimento', $data_nascimento);
         $stmt->bindParam(':area_atuacao', $area_atuacao);
-        $stmt->bindParam(':arquivo', $arquivo); // Corrigido: vinculando o arquivo
+        $stmt->bindParam(':arquivo', $arquivo);
         $stmt->bindParam(':plano', $plano);
 
         $stmt->execute();
 
-
         header('Location: sistema.php');
         exit();
     } catch (PDOException $e) {
-
         echo "Erro ao inserir os dados: " . $e->getMessage();
     }
 }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro Colaborador</title>
+    <title>Formulário de Cadastro</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #207060;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #1e4d3a;
+            padding: 40px;
+            border-radius: 15px;
+            display: flex;
+            justify-content: space-between;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 1200px;
+        }
+
+        .form-section,
+        .plan-section {
+            background-color: #114230;
+            padding: 30px;
+            border-radius: 15px;
+            width: 48%;
+            box-shadow: inset 0 4px 10px rgba(0, 0, 0, 0.1);
+            color: #fff;
+        }
+
+        .form-section h3,
+        .plan-section h3 {
+            margin-bottom: 20px;
+            color: #c0c0c0;
+        }
+
+        .form-section label,
+        .plan-section label {
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        .form-section input,
+        .form-section select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 8px;
+            margin-bottom: 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #fff;
+        }
+
+        .form-section input[type="radio"] {
+            width: auto;
+            margin-right: 10px;
+        }
+
+        .form-section .radio-group,
+        .form-section .checkbox-group {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .form-section .radio-group label,
+        .form-section .checkbox-group label {
+            margin-left: 10px;
+        }
+
+        .plan-section .plan-box {
+            background-color: #d9d9d9;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .plan-section .plan-box h4 {
+            color: #333;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+
+        .plan-section .plan-box ul {
+            list-style: none;
+            padding: 0;
+            color: #555;
+        }
+
+        .plan-section .plan-box ul li {
+            margin-bottom: 5px;
+        }
+
+        .plan-section .plan-options {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+
+        .plan-section input[type="radio"] {
+            margin-right: 8px;
+        }
+
+        .submit-btn {
+            background-color: #238E68;
+            border: none;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 1.2em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            background-color: #1e7355;
+        }
+    </style>
 </head>
 
-<style>
-    body {
-        font-family: Arial, Helvetica, sans-serif;
-        background-color: #238e68;
-        margin: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-    }
-
-    .container {
-        display: flex;
-        justify-content: space-between;
-        background-color: rgba(0, 0, 0, 0.6);
-        padding: 20px;
-        border-radius: 15px;
-        color: white;
-        width: 80%;
-    }
-
-    .form-left {
-        width: 50%;
-        height: ;
-    }
-
-    .form-right {
-        width: 45%;
-        text-align: center;
-        background-color: rgba(255, 255, 255, 0.9);
-        padding: 20px;
-        border-radius: 15px;
-        color: black;
-    }
-
-    fieldset {
-        border: 3px solid white;
-        padding: 10px;
-        height: 80vh;
-    }
-
-    .inputBox {
-        position: relative;
-        margin-bottom: 20px;
-    }
-
-    .inputUser {
-        background: none;
-        border: none;
-        border-bottom: 1px solid white;
-        outline: none;
-        color: white;
-        font-size: 15px;
-        width: 100%;
-        letter-spacing: 2px;
-    }
-
-    .labelInput {
-        position: absolute;
-        top: 0px;
-        left: 0px;
-        pointer-events: none;
-        transition: .5s;
-    }
-
-    .inputUser:focus~.labelInput,
-    .inputUser:valid~.labelInput {
-        top: -20px;
-        font-size: 12px;
-        color: dodgerblue;
-    }
-
-    #data_nascimento {
-        border: none;
-        padding: 8px;
-        border-radius: 10px;
-        outline: none;
-        font-size: 15px;
-    }
-
-    #submit {
-        background-color: #238e68;
-        border: none;
-        width: 100%;
-        padding: 10px;
-        color: black;
-        font-size: 15px;
-        cursor: pointer;
-        border-radius: 10px;
-        background-color: #238E68;
-        margin-top: 10px;
-    }
-
-    .planos {
-        margin-bottom: 20px;
-        font-size: 24px;
-    }
-
-    .card {
-        margin-bottom: 20px;
-        padding: 20px;
-        background-color: white;
-        text-align: left;
-        border-radius: 10px;
-    }
-
-    .bronze, .prata, .ouro {
-        font-size: 24px;
-        margin-bottom: 10px;
-    }
-
-    .bronze {
-        color: #F8832E;
-    }
-
-    .prata {
-        color: #90A3BF;
-    }
-
-    .ouro {
-        color: #FFB800;
-    }
-
-    .planos-list {
-        list-style: none;
-        padding: 0;
-    }
-
-    .verde {
-        color: #238E68;
-        font-weight: bold;
-    }
-
-    .foto-perfil {
-        margin-bottom: 20px;
-    }
-
-    .foto-perfil input {
-        display: block;
-        margin: 0 auto;
-    }
-
-    .inpt {
-        display: flex;
-        justify-content: space-around;
-    }
-</style>
-
 <body>
-    <form action="prestarservico.php" method="POST" enctype="multipart/form-data" class="container">
-        <div class="form-left">
-            <fieldset>
-                <legend>Cadastro</legend>
-                <div class="inputBox">
-                    <input type="text" name="nome" id="nome" class="inputUser" required>
-                    <label for="nome" class="labelInput">Nome Completo</label>
-                </div>
-                <div class="inputBox">
-                    <input type="text" name="telefone" id="telefone" class="inputUser" required>
-                    <label for="telefone" class="labelInput">Telefone</label>
-                </div>
-                <div class="inputBox">
-                    <input type="text" name="email" id="email" class="inputUser" required>
-                    <label for="email" class="labelInput">Email</label>
-                </div>
-                <div class="inputBox">
-                    <input type="text" name="sobre" id="sobre" class="inputUser" required>
-                    <label for="sobre" class="labelInput">Sobre</label>
-                </div>
-                <div class="inputBox">
-                    <input type="text" name="estado" id="estado" class="inputUser" required>
-                    <label for="estado" class="labelInput">Estado</label>
-                </div>
-                <div class="inputBox">
-                    <input type="text" name="cidade" id="cidade" class="inputUser" required>
-                    <label for="cidade" class="labelInput">Cidade</label>
-                </div>
-                <div class="inputBox">
-                    <input type="text" name="endereco" id="endereco" class="inputUser" required>
-                    <label for="endereco" class="labelInput">Endereço</label>
-                </div>
-                <div class="inputBox">
-                    <input type="password" name="senha" id="senha" class="inputUser" required>
-                    <label for="senha" class="labelInput">Senha</label>
-                </div>
-                <p>Sexo:</p>
-                <input type="radio" id="feminino" name="sexo" value="feminino" required>
-                <label for="feminino">Feminino</label>
-                <input type="radio" id="masculino" name="sexo" value="masculino" required>
-                <label for="masculino">Masculino</label>
-                <input type="radio" id="outro" name="sexo" value="outro" required>
-                <label for="outro">Outro</label>
-                <label for="data_nascimento"><b>Data de Nascimento:</b></label>
-                <input type="date" name="data_nascimento" id="data_nascimento" required>
-                <p>Area de Atuação:</p>
-                <input type="radio" id="hidraulica" name="area_atuacao" value="hidraulica" required>
-                <label for="hidraulica">Hidraulica</label>
-                <input type="radio" id="eletrica" name="area_atuacao" value="eletrica" required>
-                <label for="eletrica">Eletrica</label>
-                <input type="radio" id="pintura" name="area_atuacao" value="pintura" required>
-                <label for="pintura">Pintura</label>
-                <input type="radio" id="pequenas" name="area_atuacao" value="pequenas" required>
-                <label for="pequenas">Pequenas Reformas</label>
-            </fieldset>
-        </div>
+    <form method="POST" enctype="multipart/form-data">
+        <div class="container">
+            <!-- Seção do Formulário -->
+            <div class="form-section">
+                <h3>Cadastro</h3>
+                <label for="name">Nome Completo</label>
+                <input type="text" id="name" name="nome" required>
 
-        <div class="form-right">
-            <div class="foto-perfil">
-                <label for="arquivo">Escolha sua Foto de Perfil:</label><br>
-                <input type="file" name="arquivo" accept="image/png, image/jpeg" required>
+                <label for="phone">Telefone</label>
+                <input type="text" id="phone" name="telefone" required>
+
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="about">Sobre</label>
+                <input type="text" id="about" name="sobre" required>
+
+                <label for="state">Estado</label>
+                <input type="text" id="state" name="estado" required>
+
+                <label for="city">Cidade</label>
+                <input type="text" id="city" name="cidade" required>
+
+                <label for="address">Endereço</label>
+                <input type="text" id="address" name="endereco" required>
+
+                <label for="password">Senha</label>
+                <input type="password" id="password" name="senha" required>
+
+                <div class="radio-group">
+                    <label>Sexo:</label>
+                    <label><input type="radio" name="sexo" value="Feminino" required> Feminino</label>
+                    <label><input type="radio" name="sexo" value="Masculino" required> Masculino</label>
+                    <label><input type="radio" name="sexo" value="Outro"> Outro</label>
+                </div>
+
+                <label for="birthdate">Data de Nascimento</label>
+                <input type="date" id="birthdate" name="data_nascimento" required>
+
+                <div class="checkbox-group">
+                    <label>Área de Atuação:</label>
+                    <label><input type="checkbox" name="area_atuacao[]" value="Hidraulica"> Hidraulica</label>
+                    <label><input type="checkbox" name="area_atuacao[]" value="Eletrica"> Eletrica</label>
+                    <label><input type="checkbox" name="area_atuacao[]" value="Pintura"> Pintura</label>
+                    <label><input type="checkbox" name="area_atuacao[]" value="Pequenas Reformas"> Pequenas Reformas</label>
+                </div>
+            </div>
+            <div class="plan-section">
+                <h3>Escolha sua Foto de Perfil:</h3>
+                <input type="file" name="profile_pic" accept="image/*">
+
+                <h3>Planos Disponíveis</h3>
+
+                <!-- Box para cada plano -->
+                <div class="plan-box">
+                    <h4 style="color: #FF8C00;">Bronze</h4>
+                    <ul>
+                        <li>Prioridade de Serviços.</li>
+                        <li>Alterar Foto de Perfil.</li>
+                        <li>Alterar Sobre.</li>
+                        <li>Ter Redes Sociais no Perfil.</li>
+                        <li><strong>Adicionar Fotos de Serviços.</strong></li>
+                    </ul>
+                </div>
+
+                <div class="plan-box">
+                    <h4 style="color: #C0C0C0;">Prata</h4>
+                    <ul>
+                        <li>Prioridade de Serviços.</li>
+                        <li>Alterar Foto de Perfil.</li>
+                        <li><strong>Alterar Sobre.</strong></li>
+                        <li><strong>Ter Redes Sociais no Perfil.</strong></li>
+                        <li><strong>Adicionar Fotos de Serviços.</strong></li>
+                    </ul>
+                </div>
+
+                <div class="plan-box">
+                    <h4 style="color: #FFD700;">Ouro</h4>
+                    <ul>
+                        <li><strong>Prioridade de Serviços.</strong></li>
+                        <li><strong>Alterar Foto de Perfil.</strong></li>
+                        <li><strong>Alterar Sobre.</strong></li>
+                        <li><strong>Ter Redes Sociais no Perfil.</strong></li>
+                        <li><strong>Adicionar Fotos de Serviços.</strong></li>
+                    </ul>
+                </div>
+
+                <!-- Opções de escolha dos planos -->
+                <div class="plan-options">
+                    <label><input type="radio" name="plan" value="Bronze"> Bronze</label>
+                    <label><input type="radio" name="plan" value="Prata"> Prata</label>
+                    <label><input type="radio" name="plan" value="Ouro"> Ouro</label>
+                </div>
+
+
+
+                <input class="submit-btn" type="submit" name="submit" value="Enviar">
+
             </div>
 
-            <div class="planos">
-                Planos Disponíveis
-            </div>
-
-            <div class="card">
-                <div class="bronze">Bronze</div>
-                <ul class="planos-list">
-                    <li>Prioridade de Serviços.</li>
-                    <li>Alterar Foto de Perfil.</li>
-                    <li>Alterar Sobre.</li>
-                    <li>Ter Redes Sociais no Perfil.</li>
-                    <li class="verde">Adicionar Fotos de Serviços.</li>
-                </ul>
-            </div>
-
-            <div class="card">
-                <div class="prata">Prata</div>
-                <ul class="planos-list">
-                    <li>Prioridade de Serviços.</li>
-                    <li>Alterar Foto de Perfil.</li>
-                    <li class="verde">Alterar Sobre.</li>
-                    <li class="verde">Ter Redes Sociais no Perfil.</li>
-                    <li class="verde">Adicionar Fotos de Serviços.</li>
-                </ul>
-            </div>
-
-            <div class="card">
-                <div class="ouro">Ouro</div>
-                <ul class="planos-list">
-                    <li class="verde">Prioridade de Serviços.</li>
-                    <li class="verde">Alterar Foto de Perfil.</li>
-                    <li class="verde">Alterar Sobre.</li>
-                    <li class="verde">Ter Redes Sociais no Perfil.</li>
-                    <li class="verde">Adicionar Fotos de Serviços.</li>
-                </ul>
-            </div>
-
-            <div class="inpt">
-                <label for="bronze">Bronze</label>
-                <input type="radio" name="plano" value="bronze" id="bronze" required>
-                <label for="prata">Prata</label>
-                <input type="radio" name="plano" value="prata" id="prata" required>
-                <label for="ouro">Ouro</label>
-                <input type="radio" name="plano" value="ouro" id="ouro" required>
-            </div>
-
-            <input type="submit" name="submit" id="submit">
-        </div>
     </form>
+
+
 </body>
 
 </html>
