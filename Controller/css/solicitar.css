@@ -1,0 +1,109 @@
+.div1 {
+  display: flex;
+  border-bottom: 2px solid black;
+  padding: 10px;
+  width: 80vw;
+  margin-left: 8vw;
+}
+
+.div1 a {
+  text-decoration: none;
+  color: black;
+}
+
+.div1 h3 {
+  margin-left: 100px;
+  font-weight: 400;
+}
+
+.divs1 {
+  background-color: grey;
+  width: 15vw;
+  height: 35vh;
+  border-radius: 18px;
+  margin-left: 100px;
+  margin-top: 80px
+}
+
+.divs1 a {
+  text-decoration: none;
+  color: black;
+  padding: 10px;
+  background-color: white;
+  border-radius: 6px;
+
+}
+
+.divinformaçoes {
+
+  width: 100vw;
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 40px;
+}
+
+.menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  margin-left: 70px;
+  margin-top: -13px;
+
+}
+
+.menu-item {
+  position: relative;
+  display: inline-block;
+}
+
+.menu-link {
+  display: block;
+  padding: 15px 20px;
+  text-decoration: none;
+  color: #fff;
+  background-color: grey;
+  border-radius: 12px;
+  font-weight: 700
+}
+
+.menu-link:hover {
+  background-color: #555;
+}
+
+.submenu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  background-color: #333;
+  min-width: 160px;
+  z-index: 1;
+}
+
+.submenu li {
+  border-bottom: 1px solid #444;
+}
+
+.submenu li:last-child {
+  border-bottom: none;
+}
+
+.submenu a {
+  display: block;
+  padding: 10px 15px;
+  color: #fff;
+  text-decoration: none;
+}
+
+.submenu a:hover {
+  background-color: #238E68;
+}
+
+.menu-item:hover .submenu {
+  display: block;
+}

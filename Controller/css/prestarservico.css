@@ -1,0 +1,122 @@
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #207060;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  background-color: #1e4d3a;
+  padding: 40px;
+  border-radius: 15px;
+  display: flex;
+  justify-content: space-between;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  width: 90%;
+  max-width: 1200px;
+}
+
+.form-section,
+.plan-section {
+  background-color: #114230;
+  padding: 30px;
+  border-radius: 15px;
+  width: 48%;
+  box-shadow: inset 0 4px 10px rgba(0, 0, 0, 0.1);
+  color: #fff;
+}
+
+.form-section h3,
+.plan-section h3 {
+  margin-bottom: 20px;
+  color: #c0c0c0;
+}
+
+.form-section label,
+.plan-section label {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.form-section input,
+.form-section select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 8px;
+  margin-bottom: 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #fff;
+}
+
+.form-section input[type="radio"] {
+  width: auto;
+  margin-right: 10px;
+}
+
+.form-section .radio-group,
+.form-section .checkbox-group {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.form-section .radio-group label,
+.form-section .checkbox-group label {
+  margin-left: 10px;
+}
+
+.plan-section .plan-box {
+  background-color: #d9d9d9;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.plan-section .plan-box h4 {
+  color: #333;
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+.plan-section .plan-box ul {
+  list-style: none;
+  padding: 0;
+  color: #555;
+}
+
+.plan-section .plan-box ul li {
+  margin-bottom: 5px;
+}
+
+.plan-section .plan-options {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.plan-section input[type="radio"] {
+  margin-right: 8px;
+}
+
+.submit-btn {
+  background-color: #238E68;
+  border: none;
+  color: white;
+  padding: 15px 30px;
+  border-radius: 25px;
+  font-size: 1.2em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
+}
+
+.submit-btn:hover {
+  background-color: #1e7355;
+}

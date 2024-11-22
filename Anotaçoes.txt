@@ -1,0 +1,19 @@
+Funcionalidades 
+
+- Login - OK
+- Cadastro - OK 
+- Alterar conta - OK
+- Formulario de prestar servico - OK
+- Colocar botao de modo escuro e de linguagem em todos as paginas - PENDENTE
+- ALTERAR SENHA - PENDENTE
+- ALTERAR FOTO DE PERFIL - PENDENTE
+- ALTERAR SOBRE - PENDENTE
+- ORGANIZAR CSS - PENDENTE
+
+Arrumar sistema.css e sistema.php
+
+
+
+
+
+

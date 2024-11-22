@@ -1,0 +1,157 @@
+body {
+  background-color: #238E68;
+  margin: 8vh;
+  font-family: Arial, Helvetica, sans-serif;
+
+}
+
+.d-t {
+  text-align: center;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  background-color: #D9D9D9;
+  height: 100vh;
+
+
+}
+
+.d-um {
+  display: flex;
+  background-color: white;
+  padding: 9vh 22vh 4vh 22vh;
+
+}
+
+.img-p {
+  height: 12vh;
+  width: 12vh;
+  border-radius: 50%
+}
+
+#d-nm {
+  margin-left: 3vh;
+  margin-right: 7.5vh;
+}
+
+.aling {
+
+  margin-top: -3.4vh;
+  margin-left: -10vh
+}
+
+.t {
+  font-size: 3.2vh;
+
+}
+
+.inp-s {
+  border: none;
+  padding-left: 3.2vh;
+  padding-right: 3.2vh;
+  padding-top: 1vh;
+  padding-bottom: 1vh;
+  background-color: gray;
+  margin-left: 2.5vh;
+
+}
+
+#inp-c {
+  border: none;
+  padding-left: 3.2vh;
+  padding-right: 3.2vh;
+  padding-top: 1vh;
+  padding-bottom: 1vh;
+  background-color: #238E68;
+
+}
+.d-bx {
+
+  background-color: white;
+  height: 48vh;
+  margin-top: 5vh;
+  width: 100vh;
+
+}
+
+.ava {
+  display: flex;
+}
+
+.img-ava {
+  height: 12vh;
+  width: 12vh;
+  outline-style: outset;
+  outline-color: gray;
+
+}
+
+.grid {
+  padding-left: 10vh;
+  padding-top: 5vh;
+  display: grid;
+  grid-template-columns: 50vh 50vh;
+  justify-content: space-evenly;
+  grid-template-rows: 18vh 18vh
+}
+
+
+.svgs {
+  height: 2.5vh;
+  width: 2.5vh;
+}
+
+.pri {
+  display: inline-block;
+}
+
+.duo {
+  display: inline-block;
+}
+
+.textali {
+  text-align: left;
+  margin-left: 3.2vh;
+  margin-top: 4vh;
+  width: 13vh;
+}
+
+.div-svg {
+  margin-top: 3vh;
+  margin-left: 5vh
+}
+
+.svgs:hover {
+  outline-style: outset;
+  outline-color: #238E68;
+  fill: #238E68;
+  height: 3.5vh;
+  width: 3.5vh;
+
+}
+
+.d-avaliacao {
+  padding-bottom: 1vh;
+  padding-top: 3vh;
+  font-size: 6.2vh;
+}
+
+#nome {
+  margin-left: 45px;
+}
+
+#submit {
+  background-color: #238e68;
+  border: none;
+  width: 100%;
+  padding: 15px;
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+  border-radius: 10px;
+  margin-left: 100px;
+}
+
+fieldset {
+  border: 3px solid #238e68;
+}
