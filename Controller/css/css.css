@@ -1,15 +1,24 @@
+@media (max-width: 768px) {
+    .txtcentral{
+        margin-left: 100px;
+    }
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
+
 body {
     font-family: Arial, Helvetica, sans-serif;
 }
+
 .inicial {
     background-color: black;
     height: 20vh;
 }
+
 .switch {
     font-size: 17px;
     position: relative;
@@ -17,11 +26,13 @@ body {
     width: 3.5em;
     height: 2em;
 }
+
 .switch input {
     opacity: 0;
     width: 0;
     height: 0;
 }
+
 .slider {
     position: absolute;
     cursor: pointer;
@@ -30,6 +41,7 @@ body {
     border-radius: 50px;
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
+
 .slider:before {
     position: absolute;
     content: "";
@@ -41,13 +53,16 @@ body {
     border-radius: inherit;
     transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
 }
+
 .switch input:checked+.slider {
     box-shadow: 0 0 20px rgba(9, 117, 241, 0.8);
     border: 2px solid #0974f1;
 }
+
 .switch input:checked+.slider:before {
     transform: translateX(1.5em);
 }
+
 .contrate {
     display: flex;
     flex-direction: column;
@@ -55,7 +70,7 @@ body {
     width: 70%;
     background-color: gray;
     display: flex;
-    background-image: url('../img/servico-encanador-bauru.jpg');
+    background-image: url('Controller/img/servico-encanador-bauru.jpg');
     background-size: cover;
     /* Faz a imagem cobrir toda a área da div */
     background-position: center;
@@ -63,6 +78,7 @@ body {
     background-repeat: no-repeat;
     border-radius: 18px;
 }
+
 .central {
     height: 80vh;
     width: 100%;
@@ -70,6 +86,7 @@ body {
     align-items: center;
     justify-content: center;
 }
+
 .contrate1 {
     display: flex;
     flex-direction: column;
@@ -78,14 +95,17 @@ body {
     margin-left: 5vw;
     margin-top: 7vh;
 }
+
 .txtcontrate {
     font-weight: 400;
 }
+
 .inputlocal {
     background-color: #D9D9D9;
     border: 0;
     height: 2.2vh;
 }
+
 .central2 {
     background-color: #238E68;
     height: 80vh;
@@ -94,15 +114,18 @@ body {
     align-items: center;
     justify-content: center;
 }
+
 .imagem2 {
     width: 20%;
     height: 60%;
     background-color: black;
     margin-right: 20vw;
 }
+
 .colaborador {
     margin-top: -27vh;
 }
+
 .junte {
     padding: 8px;
     background-color: white;
@@ -111,23 +134,28 @@ body {
     text-decoration: none;
     font-weight: 700;
 }
+
 .rodape {
     background-color: black;
     height: 30vh;
 }
+
 .imgfot {
     width: 10vw;
 }
+
 .anav,
 .a-nav {
     color: #ffffff;
     text-decoration: none;
     transition: 0.3s;
 }
+
 .anav:hover,
 .a-nav:hover {
     opacity: 0.7;
 }
+
 .btnsair {
     padding: 10px;
     background-color: white;
@@ -135,6 +163,7 @@ body {
     text-decoration: none;
     border-radius: 10px;
 }
+
 .chat-button {
     position: fixed;
     bottom: 20px;
@@ -148,9 +177,11 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     z-index: 1000;
 }
+
 .chat-button i {
     font-size: 24px;
 }
+
 .chat-container {
     display: none;
     position: fixed;
@@ -162,6 +193,7 @@ body {
     border-radius: 5px;
     z-index: 999;
 }
+
 .chat-header {
     background-color: #238E68;
     color: white;
@@ -169,11 +201,13 @@ body {
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
 }
+
 .chat-body {
     padding: 20px;
     height: 300px;
     overflow-y: auto;
 }
+
 .chat-input {
     width: calc(100% - 20px);
     padding: 10px;
@@ -181,6 +215,7 @@ body {
     border-radius: 5px;
     margin: 10px;
 }
+
 .chat-send-button {
     background-color: #238E68;
     color: white;
@@ -191,13 +226,16 @@ body {
     margin-bottom: 10px;
     margin-left: 10px;
 }
+
 .central {
     display: flex;
 }
+
 .imgcentral {
     margin-top: -7vh;
     width: 50.5vw;
 }
+
 .acentral {
     padding: 8px;
     background-color: #238E68;
@@ -210,38 +248,46 @@ body {
     top: 80%;
     left: 65%;
 }
+
 .txtcentral {
     position: absolute;
     top: 65%;
     left: 65%;
     color: white;
 }
+
 .nav-list {
     list-style: none;
     display: flex;
 }
+
 .nav-list li {
     letter-spacing: 3px;
     margin-left: 32px;
 }
+
 .btnhead {
     color: white;
     font-size: 18px;
     text-decoration: none;
     transition: 0.3s;
 }
+
 .btnhead:hover {
     opacity: 0.7;
 }
+
 .menu {
     list-style: none;
-    margin: 0 0 0 70px;
+    margin: 0 0 0 10px;
     padding: 0;
 }
+
 .menu-item {
     position: relative;
     display: inline-block;
 }
+
 .menu-link {
     display: block;
     padding: 15px 20px;
@@ -251,9 +297,11 @@ body {
     border-radius: 12px;
     font-weight: 700;
 }
+
 .menu-link:hover {
     background-color: #555;
 }
+
 .submenu {
     display: none;
     position: absolute;
@@ -264,24 +312,30 @@ body {
     min-width: 160px;
     z-index: 1;
 }
+
 .submenu li {
     border-bottom: 1px solid #444;
 }
+
 .submenu li:last-child {
     border-bottom: none;
 }
+
 .submenu a {
     display: block;
     padding: 10px 15px;
     color: #fff;
     text-decoration: none;
 }
+
 .submenu a:hover {
     background-color: #238E68;
 }
+
 .menu-item:hover .submenu {
     display: block;
 }
+
 .rodape {
     background-color: #000;
     height: 270px;
@@ -289,11 +343,13 @@ body {
     display: grid;
     grid-template-columns: 1fr 1fr;
 }
+
 .paragrafro {
     color: white;
     font-size: 14px;
     margin-top: 30px;
 }
+
 .compartilhe {
     margin-top: 2rem;
     margin-bottom: 5rem;
@@ -304,13 +360,16 @@ body {
     font-weight: 700;
     margin-left: 730px;
 }
+
 .redes {
     margin-left: 700px;
 }
+
 .compartilhe:hover {
     background-color: gray;
     color: white;
 }
+
 .trilho {
     width: 90px;
     height: 40px;
@@ -320,6 +379,7 @@ body {
     cursor: pointer;
     margin-top: -7px;
 }
+
 .trilho .indicador {
     width: 40px;
     height: 40px;
@@ -330,17 +390,21 @@ body {
     left: 0;
     transition: 0.5s;
 }
+
 .trilho.dark {
     background-color: #c3c3c3;
 }
+
 .trilho.dark .indicador {
     left: 50px;
     background-color: #fff;
 }
+
 body.dark {
     background-color: #121212;
     color: #ffffff;
 }
+
 .central.dark,
 .rodape.dark,
 .chat-container.dark {

@@ -1,8 +1,8 @@
 <?php
 if (isset($_POST['submit'])) {
-    include_once('../conexao.php'); 
+    include_once('../conexao.php');
 
-    
+
     $nome = $_POST['nome'];
     $email = $_POST['email'];
     $telefone = $_POST['telefone'];
@@ -14,12 +14,12 @@ if (isset($_POST['submit'])) {
     $senha = $_POST['senha'];
 
     try {
-        
+
         $sql = "INSERT INTO usuarios (nome, email, telefone, sexo, data_nascimento, cidade, estado, endereco, senha) 
                 VALUES (:nome, :email, :telefone, :genero, :data_nascimento, :cidade, :estado, :endereco, :senha)";
         $stmt = $pdo->prepare($sql);
 
-        
+
         $stmt->bindParam(':nome', $nome);
         $stmt->bindParam(':email', $email);
         $stmt->bindParam(':telefone', $telefone);
@@ -30,14 +30,14 @@ if (isset($_POST['submit'])) {
         $stmt->bindParam(':endereco', $endereco);
         $stmt->bindParam(':senha', $senha);
 
-        
+
         $stmt->execute();
 
-        
+
         header('Location: login.php');
         exit();
     } catch (PDOException $e) {
-        
+
         echo "Erro ao inserir os dados: " . $e->getMessage();
     }
 }
@@ -45,14 +45,22 @@ if (isset($_POST['submit'])) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv=X-UA-Compatible content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro</title>
     <link rel="stylesheet" href="../Controller/css/cadastro.css">
-
+    <style>
+        @media (max-width: 768px) {
+            .box {
+                width: 50vw;
+            }
+        }
+    </style>
 </head>
+
 <body>
     <a href="../index.php" class="btnvoltar">Voltar</a>
     <div class="box">
@@ -89,7 +97,7 @@ if (isset($_POST['submit'])) {
                 <label for="outro">Outro</label>
                 <br><br>
                 <label for="data_nascimento"><b>Data de Nascimento:</b></label>
-                <input type="date" name="data_nascimento" id="data_nascimento"  required>
+                <input type="date" name="data_nascimento" id="data_nascimento" required>
                 <br><br><br>
                 <div class="inputBox">
                     <input type="text" name="cidade" id="cidade" class="inputUser" required>
@@ -111,11 +119,12 @@ if (isset($_POST['submit'])) {
                     <label for="senha" class="labelInput">Senha</label>
                 </div>
                 <br><br>
-                
-                <input type="submit" name="submit" id="submit" >
+
+                <input type="submit" name="submit" id="submit">
             </fieldset>
         </form>
     </div>
 
 </body>
+
 </html>

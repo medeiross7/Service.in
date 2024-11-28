@@ -1,4 +1,4 @@
-// Chat de suporte ao usuario
+
 function toggleChat() {
   var chatContainer = document.getElementById('chatContainer');
   chatContainer.style.display = chatContainer.style.display === 'none' ? 'block' : 'none';
@@ -35,14 +35,13 @@ langToggle.addEventListener('change', () => {
     cadastro.textContent = "Sign Up";
     prestarservicoo.textContent = "Provide Service";
     solicitarservicoo.textContent = "Request Service";
-    profile.textContent = "Profile";
     account.textContent = "Change Account";
     profiledata.textContent = "Change Profile Data";
     leave.textContent = "Leave";
     precisando.textContent =
       "If you need any domestic service, we at Service.in offer these services, request them here";
     btnsolicitar.textContent = "REQUEST SERVICE";
-    langLabel.textContent = 'English :';
+    langLabel.textContent = 'English:';
   } else {
     // Voltar para português
 
@@ -50,7 +49,6 @@ langToggle.addEventListener('change', () => {
     cadastro.textContent = "Cadastro";
     prestarservicoo.textContent = "Prestar Servico";
     solicitarservicoo.textContent = "Solicitar Servico";
-    profile.textContent = "Perfil";
     account.textContent = "Alterar Conta";
     profiledata.textContent = "Alterar dados do perfil";
     leave.textContent = "Sair";

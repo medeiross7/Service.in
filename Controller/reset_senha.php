@@ -15,9 +15,10 @@ $error_message = ''; // Para armazenar mensagens de erro
 
 if (isset($_POST['submit'])) {
     if (!empty($_POST['nova_senha'])) {
-        $nova_senha = password_hash($_POST['nova_senha'], PASSWORD_DEFAULT); // Criptografa a nova senha
+        $nova_senha = $_POST['nova_senha']; // Senha em texto puro
         $email = $_SESSION['email'];
 
+        // Atualiza a senha diretamente no banco de dados
         $sql = "UPDATE usuarios SET senha = '$nova_senha' WHERE email = '$email'";
         if ($mysqli->query($sql) === TRUE) {
             echo "Senha alterada com sucesso!";

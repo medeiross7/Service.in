@@ -1,3 +1,8 @@
+@media (max-width: 768px){
+  #submit{
+    width: 100vw;
+  }
+}
 .divcentro {
   display: flex;
   justify-content: center;

@@ -2,7 +2,7 @@
 
 include '../conexao.php';
 
-$nome = "Gabriel Alvaro"; // Pode vir de uma entrada de usuário, verifique a validação
+$nome = "Arthur Felipe"; // Pode vir de uma entrada de usuário, verifique a validação
 
 try {
   // Consulta única para pegar o usuário

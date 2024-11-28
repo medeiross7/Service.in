@@ -11,7 +11,7 @@ if (isset($_POST['submit'])) {
         
         if ($result && mysqli_num_rows($result) > 0) {
             $_SESSION['email'] = $email;
-            header('Location: reset_senha.php'); // Redireciona para a página de reset
+            header('Location: ../Controller/reset_senha.php'); // Redireciona para a página de reset
             exit;
         } else {
             $error_message = "Email não encontrado.";

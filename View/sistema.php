@@ -26,23 +26,160 @@ if (isset($_POST['submit'])) {
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Service.in</title>
-  <link rel="stylesheet" href="../Controller/css/sistema.css">
+  <link rel="stylesheet" href="../Controller/css/css.css">
+  <style>
+    @media (max-width: 1024px) {
+      .incial {
+        flex-direction: column;
+        height: auto;
+      }
 
+      .btnhead {
+        font-size: 16px;
+        margin: 5px 0;
+      }
+
+      .acentral {
+        width: 80%;
+        margin: auto;
+      }
+
+      .contrate1 h2 {
+        font-size: 18px;
+        text-align: center;
+      }
+
+      .contrate img {
+        height: 40vh;
+        width: auto;
+        border-radius: 18px;
+      }
+
+      .colaborador h1 {
+        font-size: 22px;
+      }
+
+      .colaborador p {
+        font-size: 14px;
+      }
+
+      .rodape {
+        padding: 10px;
+        text-align: center;
+      }
+
+      .rodape img {
+        margin: 0 auto;
+      }
+
+      .redes img {
+        width: 24px;
+        height: 24px;
+      }
+
+      .chat-container {
+        width: 90%;
+        margin: 0 auto;
+      }
+
+      .chat-header {
+        font-size: 18px;
+      }
+
+      .chat-input {
+        font-size: 14px;
+      }
+
+      .chat-body {
+        font-size: 14px;
+      }
+
+      .rodape .compartilhe {
+        display: block;
+        margin: 10px auto;
+      }
+    }
+
+    /* Media Queries para telas menores (celulares) */
+    @media (max-width: 768px) {
+      .txtcentral {
+        margin-left: -120px;
+        font-size: 14px;
+      }
+
+      .acentral {
+        width: 29%;
+        margin: auto;
+        margin-left: -10vw;
+      }
+
+      .colaborador h1 {
+        font-size: 18px;
+        margin-left: 100px;
+        margin-bottom: 200px;
+      }
+
+      .colaborador p {
+        font-size: 12px;
+        margin-left: 100px;
+      }
+
+      .imgcontrate {
+        height: auto;
+        width: 100%;
+      }
+
+      .chat-container {
+        width: 100%;
+        max-width: 400px;
+        margin: auto;
+      }
+
+      .chat-header {
+        font-size: 16px;
+      }
+
+      .chat-body {
+        font-size: 14px;
+      }
+
+      .chat-input {
+        font-size: 14px;
+        margin: 5px 0;
+      }
+
+      .chat-send-button {
+        font-size: 14px;
+      }
+
+      .chat-button {
+        font-size: 18px;
+        bottom: 10px;
+        right: 300px;
+      }
+
+      .rodape {
+        height: 35vh;
+      }
+      .menu{
+        margin-top: -200px;
+      }
+    }
+  </style>
 </head>
 
 <body style="font-family: Arial, Helvetica, sans-serif;">
   <div style="height: 20vh; background-color: #238E68; display: flex;  flex-direction: column;" class="incial">
-
     <div style="margin-left:   35vw ; heigth: 20vh;">
       <a href="../index.php"><img style="heigth: 10vh;" src="../Controller/img/Servece 1.png" alt=""></a>
     </div>
-
     <div style="display: flex; margin-top: 30px; justify-content: space-around; margin-left: -100px;">
-      <div>
+      <div style="margin-bottom: 20px;">
         <ul class="menu">
           <li class="menu-item">
             <a href="#" class="menu-link" id="linkmenu">Menu</a>
@@ -67,22 +204,20 @@ if (isset($_POST['submit'])) {
         </label>
       </div>
       <div class="trilho" id="trilho">
-
         <div class="indicador"></div>
-
       </div>
       <div id="content">
-
       </div>
     </div>
   </div>
   <div class="central">
     <div class="contrate">
+      <img style="height: 60vh; border-radius: 18px;" class="imgcontrate"
+        src="../Controller/img/servico-encanador-bauru.jpg" alt="">
       <div class="contrate1">
         <h2 class="txtcentral" id="precisando">Esta Precisando de algum <br>serviço domestico, nos da <br> Service.in
           oferecemos esses <br> serviços, solicite aqui</h2>
         <a class="acentral" href="solicitar.php" id="btnsolicitar">SOLICITAR SERVICO</a>
-
       </div>
     </div>
   </div>
@@ -103,26 +238,21 @@ if (isset($_POST['submit'])) {
           todo <br> com usuarios proximos</p>
       </div>
       <div style="margin-top: 20px; margin-left: 14vw;">
-        <a class="junte" href="prestarservico.php">Junte-Se A Nos</a>
+        <a class="junte" href="../Model/prestarservico.php">Junte-Se A Nos</a>
       </div>
     </div>
   </div>
-
-
   <form action="index.php" method="POST">
     <div class="chat-button" onclick="toggleChat()">
-      <i class="fa fa-comment"></i> <!-- Ícone (exemplo usando Font Awesome) -->
-
+      <i class="fa fa-comment"></i>
     </div>
 
-    <!-- Contêiner do chat -->
     <div class="chat-container" id="chatContainer">
       <div class="chat-header">
         Suporte
         <span style="float: right; cursor: pointer;" onclick="toggleChat()">Fechar</span>
       </div>
       <div class="chat-body" id="chatBody">
-        <!-- Aqui ficará o conteúdo do chat -->
         Bem-vindo ao Suporte!
       </div>
       <input type="text" class="chat-input" placeholder="Tema" name="tema">
@@ -133,34 +263,31 @@ if (isset($_POST['submit'])) {
 
   <div class="rodape">
     <div>
-      <img src="img/Servece 3.png">
+      <img src="../Controller/img/Servece 3.png">
       <p class="paragrafro">
         © 2024 Service.in Todos os direitos reservados. <br>
         Endereço: Rua Itajúba, 223, floresta, Belo Horizonte - MG, Brasil<br>E-mail: contato@exemplo.com.br
         <br><br><br><br><br>
-
         Para mais informações, visite nossa pagina <a style=" color: white;" href="sobre.php">SOBRE NÓS</a> ou entre em
         contato conosco.
-
       <p>
     </div>
-    <div>
+    <divl>
       <button class="compartilhe">Compartilhe</button>
       <p class="redes" style="color: white; font-family: Arial, Helvetica, sans-serif; font-weight: 700;">
         Encontre-Nos
       </p>
-
       <a style="margin-right: 10px;" class="redes" href="https://web.whatsapp.com/" target="_blank"><img
-          src="img/Vector.png"></a>
+          src="../Controller/img/Vector.png"></a>
       <a style="margin-right: 10px;" href="https://www.instagram.com/" target="_blank"><img
-          src="img/Vector (2).png"></a>
-      <a style="margin-right: 10px;" href="https://github.com/" target="_blank"><img src="img/Social Icons (1).png"></a>
-      <a href="https://br.linkedin.com/" target="_blank"><img src="img/Social Icons (2).png"></a>
-    </div>
-
+          src="../Controller/img/Vector (2).png"></a>
+      <a style="margin-right: 10px;" href="https://github.com/" target="_blank"><img
+          src="../Controller/img/Social Icons (1).png"></a>
+      <a href="https://br.linkedin.com/" target="_blank"><img src="../Controller/img/Social Icons (2).png"></a>
+  </div>
   </div>
 
   <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-  <script src="Controller/js/script.js"></script>
+  <script src="../Controller/js/script.js"></script>
 
 </html>

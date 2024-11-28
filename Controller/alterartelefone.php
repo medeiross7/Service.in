@@ -9,38 +9,40 @@ if (isset($_SESSION['email'])) {
 
     // Verifique se o formulário foi enviado
     if (isset($_POST['update'])) {
-        $nova_senha = $_POST['nova_senha'];
-        $confirma_senha = $_POST['confirma_senha'];
+        $novo_telefone = $_POST['novo_telefone'];
+        $confirma_telefone = $_POST['confirma_telefone'];
 
-        // Verifique se as senhas são iguais
-        if ($nova_senha === $confirma_senha) {
-            // Prepare a consulta SQL para atualizar a senha no banco de dados
-            $sql = "UPDATE usuarios SET senha = :nova_senha WHERE email = :email";
+        // Verifique se os telefones são iguais
+        if ($novo_telefone === $confirma_telefone) {
+            // Prepare a consulta SQL para atualizar o telefone no banco de dados
+            $sql = "UPDATE usuarios SET telefone = :novo_telefone WHERE email = :email";
             $stmt = $pdo->prepare($sql);
 
             // Execute a consulta com os parâmetros
-            if ($stmt->execute([':nova_senha' => $nova_senha, ':email' => $email])) {
-                echo "Senha alterada com sucesso!";
+            if ($stmt->execute([':novo_telefone' => $novo_telefone, ':email' => $email])) {
+                echo "Telefone alterado com sucesso!";
                 header('Location: ../Model/perfil_colaborador.php'); // Redireciona para o perfil após a alteração
+                exit(); // Adiciona exit() para garantir que o código seja interrompido após o redirecionamento
             } else {
-                echo "Erro ao alterar a senha.";
+                echo "Erro ao alterar o telefone.";
             }
         } else {
-            echo "As senhas não coincidem.";
+            echo "Os telefones não coincidem.";
         }
     }
 } else {
-    header('Location: login.php'); // Se não estiver logado, redireciona para o login
+    header('Location: ../View/login.php'); // Se não estiver logado, redireciona para o login
     exit();
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alterar Senha</title>
+    <title>Alterar Telefone</title>
     <link rel="stylesheet" href="css/Alterarsenha.css">
 </head>
 
@@ -52,11 +54,11 @@ if (isset($_SESSION['email'])) {
     </div>
     <div class="divcentro">
         <div>
-            <h1>Alterar Senha</h1>
-            <form action="alterarsenha.php" method="POST">
-                <input class="inputsobre" type="password" placeholder="Nova Senha" name="nova_senha" required>
-                <input class="inputsobre" type="password" placeholder="Confirmar Senha" name="confirma_senha" required>
-                <input type="submit" name="update" id="submit" value="Alterar Senha">
+            <h1>Alterar Telefone</h1>
+            <form action="alterartelefone.php" method="POST">
+                <input class="inputsobre" type="text" placeholder="Novo Telefone" name="novo_telefone" required>
+                <input class="inputsobre" type="text" placeholder="Confirmar Telefone" name="confirma_telefone" required>
+                <input type="submit" name="update" id="submit" value="Alterar Telefone">
             </form>
         </div>
     </div>

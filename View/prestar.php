@@ -13,17 +13,24 @@ $logado = $_SESSION['email'];
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Página de Serviços</title>
-    <link rel="stylesheet" href="prestar.css">
     <link rel="stylesheet" href="../Controller/css/prestar.css">
+    <style>
+        @media (max-width: 768px) {
+            nav {
+                display: flex;
+                flex-direction: row;
+            }
+            .menu-link{
+                margin-top: 20px;
+            }
+        }
+    </style>
 </head>
 
 <body>
     <header>
         <a href="../index.php"><img src="../Controller/img/Servece 1.png" alt="Logo"></a>
         <nav>
-            <a href="prestar.php">Prestar Serviços</a>
-            <a href="solicitar.php">Solicitar Serviço</a>
-            <a href="sobre.php">Sobre</a>
             <ul class="menu">
                 <li class="menu-item">
                     <a href="#" class="menu-link">Menu</a>
@@ -35,6 +42,9 @@ $logado = $_SESSION['email'];
                     </ul>
                 </li>
             </ul>
+            <a id="prestar" href="prestar.php">Prestar Serviços</a>
+            <a id="solicitar" href="solicitar.php">Solicitar Serviço</a>
+            <a id="sobre" href="sobre.php">Sobre</a>
         </nav>
     </header>
 
@@ -45,7 +55,7 @@ $logado = $_SESSION['email'];
         </section>
         <section class="section">
             <h2>Faça login para solicitar serviços</h2>
-            <a href="../Model/prestarservico.php"class="button">COMEÇAR</a>
+            <a href="../Model/prestarservico.php" class="button">COMEÇAR</a>
         </section>
     </main>
 

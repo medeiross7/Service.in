@@ -1,21 +1,42 @@
 <?php
 session_start();
 
-// Verifica se a sessão está estabelecida corretamente
 if (!isset($_SESSION['email']) || !isset($_SESSION['senha'])) {
-    header('Location: ../View/login.php');
+    header('Location: ../login.php');
     exit();
 }
 
-include_once('conexao.php');
+include_once('../conexao.php');
 
-// Verifica se o ID foi passado pela URL
-if (!empty($_GET['id'])) {
-    $id = intval($_GET['id']); // Usa intval para garantir que $id é um número inteiro
+// Verifica se o ID foi enviado via POST
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id']) && is_numeric($_POST['id'])) {
+    $id = intval($_POST['id']); // Converte para inteiro para segurança
 
-    // Prepara e executa a consulta para deletar o usuário
-    $stmt = $conexao->prepare("DELETE FROM usuarios WHERE id = $id");
-    $stmt->bind_param("i", $id);
-    $stmt->execute();
+    try {
+        // Verifica se o ID existe no banco de dados
+        $checkStmt = $pdo->prepare("SELECT * FROM usuarios WHERE id = :id");
+        $checkStmt->bindValue(':id', $id, PDO::PARAM_INT);
+        $checkStmt->execute();
+
+        if ($checkStmt->rowCount() > 0) {
+            // O ID existe, então delete o registro
+            $stmt = $pdo->prepare("DELETE FROM usuarios WHERE id = :id");
+            $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+
+            if ($stmt->execute()) {
+                session_destroy();
+                header("Location: ../index.php");
+                exit();
+            } else {
+                echo "Erro ao deletar o usuário.";
+            }
+        } else {
+            echo "Usuário não encontrado.";
+        }
+    } catch (PDOException $e) {
+        echo "Erro: " . $e->getMessage();
+    }
+} else {
+    echo "Requisição inválida.";
 }
 ?>

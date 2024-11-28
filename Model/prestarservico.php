@@ -10,11 +10,11 @@ if (isset($_POST['submit'])) {
     if (isset($_FILES['profile_pic']) && $_FILES['profile_pic']['error'] == 0) {
         $extensao = strtolower(substr($_FILES['profile_pic']['name'], -4));
         $novo_nome = md5(time()) . $extensao;
-        $diretorio = "img/";
+        $diretorio = "../Controller/uploads/";
         move_uploaded_file($_FILES['profile_pic']['tmp_name'], $diretorio . $novo_nome);
         $arquivo = $novo_nome;
     } else {
-        $arquivo = null; // ou algum valor padrão
+        $arquivo = null; 
     }
 
     $plano = $_POST['plan'] ?? null;
@@ -52,7 +52,7 @@ if (isset($_POST['submit'])) {
 
         $stmt->execute();
 
-        header('Location: ../sistema.php');
+        header('Location: ../View/sistema.php');
         exit();
     } catch (PDOException $e) {
         echo "Erro ao inserir os dados: " . $e->getMessage();
@@ -67,7 +67,16 @@ if (isset($_POST['submit'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulário de Cadastro</title>
     <link rel="stylesheet" href="../Controller/css/prestarservico.css">
-    
+    <style>
+        @media (max-width: 768px) {
+            .form-section{
+                margin-top: 40px;
+            }
+            .plan-section{
+                margin-top: 50px;
+            }
+        }
+    </style>
 </head>
 
 <body>
