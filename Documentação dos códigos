@@ -1,0 +1,392 @@
+Explicação do Código de Alterar Senha
+Início da Sessão:
+
+session_start();: Inicia uma nova sessão ou resume uma sessão existente. Necessário para utilizar variáveis de sessão.
+
+Remoção de Dados de Sessão:
+
+unset($_SESSION['email']);: Remove a variável de sessão email.
+
+unset($_SESSION['senha']);: Remove a variável de sessão senha.
+
+Redirecionamento para a Página de Login:
+
+header('Location: ../View/login.php');: Redireciona o usuário para a página de login.
+
+Verificação de Envio de Formulário:
+
+if(isset($_POST['submit']) && !empty($_POST['email']) && !empty($_POST['senha'])): Verifica se o formulário foi submetido e se os campos email e senha não estão vazios.
+
+Conexão com o Banco de Dados:
+
+include_once('conexao.php');: Inclui o arquivo de conexão com o banco de dados.
+
+Obtenção de Dados do Formulário:
+
+$email = $_POST['email'];: Armazena o valor do campo email na variável $email.
+
+$senha = $_POST['senha'];: Armazena o valor do campo senha na variável $senha.
+
+Consulta SQL:
+
+SELECT * FROM usuarios WHERE email = '$email' AND senha = '$senha': Consulta o banco de dados para verificar se existe um usuário com o email e senha fornecidos.
+
+Execução da Consulta:
+
+$result = $mysqli->query($sql);: Executa a consulta SQL e armazena o resultado na variável $result.
+
+Verificação de Resultados da Consulta:
+
+if(mysqli_num_rows($result) < 1): Verifica se a consulta retornou menos de um resultado, ou seja, se o usuário não foi encontrado.
+
+Se o usuário não for encontrado, os dados de sessão são removidos e o usuário é redirecionado para a página de login.
+
+else: Se o usuário for encontrado, os dados de sessão email e senha são definidos e o usuário é redirecionado para o sistema.
+
+Redirecionamento Condicional:
+
+header('Location: ../View/login.php');: Se os campos de email ou senha estiverem vazios, o usuário é redirecionado para a página de login.
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Explicação do Código Alterar a Senha
+Inclusão do Arquivo de Conexão:
+
+include_once('../conexao.php');: Inclui o arquivo que contém a conexão com o banco de dados.
+
+Início da Sessão:
+
+session_start();: Inicia uma nova sessão ou resume uma sessão existente. Necessário para utilizar variáveis de sessão.
+
+Verificação de Login do Usuário:
+
+if (isset($_SESSION['email'])): Verifica se o usuário está logado, ou seja, se a variável de sessão email está definida.
+
+Processamento do Formulário de Alteração de Senha:
+
+if (isset($_POST['update'])): Verifica se o formulário de alteração de senha foi enviado.
+
+nova_senha e confirma_senha: Captura os valores das novas senhas fornecidas pelo usuário.
+
+Verificação da Igualdade das Senhas:
+
+if ($nova_senha === $confirma_senha): Verifica se a nova senha e a confirmação da nova senha são iguais.
+
+Preparação e Execução da Consulta SQL:
+
+sql = "UPDATE usuarios SET senha = :nova_senha WHERE email = :email";: Prepara a consulta SQL para atualizar a senha do usuário no banco de dados.
+
+stmt = $pdo->prepare($sql);: Prepara a declaração SQL com o PDO.
+
+if ($stmt->execute([':nova_senha' => $nova_senha, ':email' => $email])): Executa a declaração com os parâmetros fornecidos e verifica se a execução foi bem-sucedida.
+
+Redirecionamento:
+
+header('Location: ../Model/perfil_colaborador.php');: Redireciona o usuário para o perfil após a alteração bem-sucedida da senha.
+
+Mensagens de Erro:
+
+echo "Erro ao alterar a senha.";: Exibe uma mensagem de erro se a atualização da senha falhar.
+
+echo "As senhas não coincidem.";: Exibe uma mensagem de erro se as senhas fornecidas não forem iguais.
+
+Redirecionamento se Não Logado:
+
+header('Location: login.php');: Redireciona o usuário para a página de login se não estiver logado.
+
+exit();: Encerra o script para garantir que o redirecionamento ocorra imediatamente.
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Explicação do Código Alterar Telefone
+Inclusão do Arquivo de Conexão:
+
+include_once('../conexao.php');: Inclui o arquivo que contém a conexão com o banco de dados.
+
+Início da Sessão:
+
+session_start();: Inicia uma nova sessão ou resume uma sessão existente. Necessário para utilizar variáveis de sessão.
+
+Verificação de Login do Usuário:
+
+if (isset($_SESSION['email'])): Verifica se o usuário está logado, ou seja, se a variável de sessão email está definida.
+
+Processamento do Formulário de Alteração de Telefone:
+
+if (isset($_POST['update'])): Verifica se o formulário de alteração de telefone foi enviado.
+
+$novo_telefone e $confirma_telefone: Captura os valores dos novos telefones fornecidos pelo usuário.
+
+Verificação da Igualdade dos Telefones:
+
+if ($novo_telefone === $confirma_telefone): Verifica se o novo telefone e a confirmação do novo telefone são iguais.
+
+Preparação e Execução da Consulta SQL:
+
+$sql = "UPDATE usuarios SET telefone = :novo_telefone WHERE email = :email";: Prepara a consulta SQL para atualizar o telefone do usuário no banco de dados.
+
+$stmt = $pdo->prepare($sql);: Prepara a declaração SQL com o PDO.
+
+if ($stmt->execute([':novo_telefone' => $novo_telefone, ':email' => $email])): Executa a declaração com os parâmetros fornecidos e verifica se a execução foi bem-sucedida.
+
+Redirecionamento:
+
+header('Location: ../Model/perfil_colaborador.php');: Redireciona o usuário para o perfil após a alteração bem-sucedida do telefone.
+
+exit();: Encerra o script para garantir que o redirecionamento ocorra imediatamente.
+
+Mensagens de Erro:
+
+echo "Erro ao alterar o telefone.";: Exibe uma mensagem de erro se a atualização do telefone falhar.
+
+echo "Os telefones não coincidem.";: Exibe uma mensagem de erro se os telefones fornecidos não forem iguais.
+
+Redirecionamento se Não Logado:
+
+header('Location: ../View/login.php');: Redireciona o usuário para a página de login se não estiver logado.
+
+exit();: Encerra o script para garantir que o redirecionamento ocorra imediatamente.
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Explicação do Código Deletar Conta
+Início da Sessão:
+
+session_start();: Inicia uma nova sessão ou retoma uma sessão existente. Necessário para utilizar variáveis de sessão.
+
+Verificação de Login do Usuário:
+
+if (!isset($_SESSION['email']) || !isset($_SESSION['senha'])): Verifica se as variáveis de sessão email e senha estão definidas, o que indica que o usuário está logado.
+
+header('Location: ../View/login.php');: Redireciona o usuário para a página de login se não estiver logado.
+
+exit();: Encerra o script para garantir que o redirecionamento ocorra imediatamente.
+
+Inclusão do Arquivo de Conexão:
+
+include_once('../conexao.php');: Inclui o arquivo que contém a conexão com o banco de dados.
+
+Verificação da Requisição e do ID:
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id']) && is_numeric($_POST['id'])): Verifica se a requisição foi enviada via POST e se o ID é um número válido.
+
+$id = intval($_POST['id']);: Converte o ID para um inteiro para maior segurança.
+
+Preparação e Execução das Consultas SQL:
+
+try { ... } catch (PDOException $e) { ... }: Usa um bloco try-catch para tratar possíveis exceções lançadas pelo PDO.
+
+checkStmt = $pdo->prepare("SELECT * FROM usuarios WHERE id = :id");: Prepara uma consulta para verificar se o ID existe no banco de dados.
+
+checkStmt->bindValue(':id', $id, PDO::PARAM_INT);: Vincula o valor do ID ao parâmetro na consulta.
+
+checkStmt->execute();: Executa a consulta.
+
+if ($checkStmt->rowCount() > 0): Verifica se a consulta retornou algum resultado, indicando que o ID existe.
+
+stmt = $pdo->prepare("DELETE FROM usuarios WHERE id = :id");: Prepara a consulta para deletar o usuário.
+
+stmt->bindValue(':id', $id, PDO::PARAM_INT);: Vincula o valor do ID ao parâmetro na consulta.
+
+if ($stmt->execute()): Executa a consulta e verifica se a execução foi bem-sucedida.
+
+session_destroy();: Destrói a sessão atual.
+
+header("Location: ../View/index.php");: Redireciona para a página inicial.
+
+exit();: Encerra o script para garantir que o redirecionamento ocorra imediatamente.
+
+echo "Usuário não encontrado.";: Exibe uma mensagem se o usuário não for encontrado.
+
+echo "Erro: " . $e->getMessage();: Exibe uma mensagem de erro se uma exceção for lançada.
+
+Requisição Inválida:
+
+else { echo "Requisição inválida."; }: Exibe uma mensagem de erro se a requisição não for válida.
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Explicação do Código de Logar
+Início da Sessão:
+
+session_start();: Inicia uma nova sessão ou retoma uma sessão existente. Necessário para utilizar variáveis de sessão.
+
+Verificação de Envio de Formulário:
+
+if (isset($_POST['submit']) && !empty($_POST['email']) && !empty($_POST['senha'])): Verifica se o formulário foi submetido e se os campos email e senha não estão vazios.
+
+Inclusão do Arquivo de Conexão:
+
+include_once('../conexao.php');: Inclui o arquivo que contém a conexão com o banco de dados.
+
+Obtenção de Dados do Formulário:
+
+$email = $_POST['email'];: Armazena o valor do campo email na variável $email.
+
+$senha = $_POST['senha'];: Armazena o valor do campo senha na variável $senha.
+
+Consulta SQL:
+
+$sql = "SELECT * FROM usuarios WHERE email = '$email' AND senha = '$senha'";: Consulta o banco de dados para verificar se existe um usuário com o email e senha fornecidos.
+
+Execução da Consulta:
+
+$result = $mysqli->query($sql);: Executa a consulta SQL e armazena o resultado na variável $result.
+
+Verificação de Resultados da Consulta:
+
+if (mysqli_num_rows($result) < 1): Verifica se a consulta retornou menos de um resultado, ou seja, se o usuário não foi encontrado.
+
+Se o usuário não for encontrado, os dados de sessão são removidos e o usuário é redirecionado para a página de login.
+
+else: Se o usuário for encontrado, os dados de sessão email e senha são definidos e o usuário é redirecionado para o sistema.
+
+Redirecionamento Condicional:
+
+header('Location: login.php');: Se os campos email ou senha estiverem vazios, o usuário é redirecionado para a página de login.
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Explicação do Código Resetar Senha
+Configurações de Exibição de Erros:
+
+ini_set('display_errors', 1);: Ativa a exibição de erros.
+
+ini_set('display_startup_errors', 1);: Ativa a exibição de erros durante a inicialização do PHP.
+
+error_reporting(E_ALL);: Configura para relatar todos os erros.
+
+Início da Sessão:
+
+session_start();: Inicia uma nova sessão ou retoma uma sessão existente. Necessário para utilizar variáveis de sessão.
+
+Inclusão do Arquivo de Conexão:
+
+include_once('../conexao.php');: Inclui o arquivo que contém a conexão com o banco de dados.
+
+Verificação de Login do Usuário:
+
+if (!isset($_SESSION['email'])): Verifica se o email do usuário está armazenado na sessão, indicando que o usuário está logado.
+
+header('Location: ../View/esquecisenha.php');: Redireciona o usuário para a página de recuperação de senha se não estiver logado.
+
+exit;: Encerra o script para garantir que o redirecionamento ocorra imediatamente.
+
+Variável de Mensagem de Erro:
+
+$error_message = '';: Inicializa a variável para armazenar mensagens de erro.
+
+Processamento do Formulário de Alteração de Senha:
+
+if (isset($_POST['submit'])): Verifica se o formulário de alteração de senha foi submetido.
+
+if (!empty($_POST['nova_senha'])): Verifica se o campo nova_senha não está vazio.
+
+$nova_senha = $_POST['nova_senha'];: Armazena a nova senha fornecida pelo usuário.
+
+$email = $_SESSION['email'];: Armazena o email do usuário da sessão.
+
+Atualização da Senha no Banco de Dados:
+
+$sql = "UPDATE usuarios SET senha = '$nova_senha' WHERE email = '$email'";: Prepara a consulta SQL para atualizar a senha do usuário no banco de dados.
+
+if ($mysqli->query($sql) === TRUE): Executa a consulta SQL e verifica se a execução foi bem-sucedida.
+
+unset($_SESSION['email']);: Limpa a sessão após a alteração da senha.
+
+header('Location: ../View/login.php');: Redireciona para a página de login.
+
+exit;: Encerra o script para garantir que o redirecionamento ocorra imediatamente.
+
+Mensagens de Erro:
+
+else { $error_message = "Erro ao atualizar a senha: " . $mysqli->error; }: Captura e exibe uma mensagem de erro se a atualização da senha falhar.
+
+else { $error_message = "Por favor, preencha a nova senha."; }: Exibe uma mensagem de erro se o campo nova_senha estiver vazio.
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Explicação do Código Sair
+Início da Sessão:
+
+session_start();: Inicia uma nova sessão ou retoma uma sessão existente. Necessário para utilizar variáveis de sessão.
+
+Remoção de Dados de Sessão:
+
+unset($_SESSION['email']);: Remove a variável de sessão email.
+
+unset($_SESSION['senha']);: Remove a variável de sessão senha.
+
+Redirecionamento para a Página de Login:
+
+header('Location: ../View/login.php');: Redireciona o usuário para a página de login.
+
+Encerramento do Script:
+
+exit();: Garante que o script seja interrompido imediatamente após o redirecionamento, evitando a execução de qualquer código adicional que possa estar após o redirecionamento.
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Explicação do Código de conexão
+Configurações do Banco de Dados:
+
+$host = 'localhost';: Define o host do banco de dados (neste caso, localhost).
+
+$usuario = 'root';: Define o usuário do banco de dados (neste caso, root).
+
+$senha = '';: Define a senha do banco de dados (neste caso, uma string vazia).
+
+$banco = 'cadastro';: Define o nome do banco de dados (neste caso, cadastro).
+
+Conexão utilizando PDO:
+
+try { ... } catch (PDOException $e) { ... }: Bloco try-catch usado para capturar e tratar exceções.
+
+new PDO("mysql:host=$host;dbname=$banco", $usuario, $senha);: Cria uma nova instância de PDO para conectar ao banco de dados.
+
+$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);: Configura o modo de erro do PDO para lançar exceções em caso de erro de conexão.
+
+echo "Erro de conexão: " . $e->getMessage();: Exibe uma mensagem de erro se a conexão falhar.
+
+Conexão utilizando MySQLi:
+
+new mysqli($host, $usuario, $senha, $banco);: Cria uma nova instância de MySQLi para conectar ao banco de dados.
+
+if ($mysqli->connect_error) { die("Erro de conexão MySQLi: " . $mysqli->connect_error); }: Verifica se houve um erro na conexão MySQLi e exibe uma mensagem de erro se necessário.
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Explicação do Código de chat
+Verificação do Envio do Formulário:
+
+if (isset($_POST['submit'])): Verifica se o formulário foi submetido. O formulário é submetido via método POST, o que é indicado pela verificação isset($_POST['submit']).
+
+Inclusão do Arquivo de Conexão:
+
+include_once('conexao.php');: Inclui o arquivo que contém a conexão com o banco de dados. Isso permite usar a variável $mysqli para realizar operações no banco de dados.
+
+Captura de Dados do Formulário:
+
+$tema = $_POST['tema'];: Captura o valor do campo tema do formulário e o armazena na variável $tema.
+
+$mensagem = $_POST['mensagem'];: Captura o valor do campo mensagem do formulário e o armazena na variável $mensagem.
+
+Inserção de Dados no Banco de Dados:
+
+$result = mysqli_query($mysqli, "INSERT INTO suporte (tema, mensagem) VALUES ('$tema', '$mensagem')");: Executa a query SQL para inserir os dados no banco de dados. Usa a função mysqli_query para enviar a query ao banco de dados.
+
+Verificação de Sucesso da Query:
+
+if (!$result): Verifica se a query não foi executada com sucesso.
+
+die('Erro na query: ' . mysqli_error($mysqli));: Se houve um erro, exibe a mensagem de erro e encerra o script usando die().
+
+Fechamento da Conexão com o Banco de Dados:
+
+mysqli_close($mysqli);: Fecha a conexão com o banco de dados. É uma boa prática fechar a conexão após a conclusão das operações.
+
+Redirecionamento após Inserção Bem-Sucedida:
+
+header('Location: index.php');: Redireciona o usuário para a página inicial após a inserção bem-sucedida dos dados.
+
+exit;: Encerra o script para garantir que o redirecionamento ocorra imediatamente, evitando a execução de qualquer código adicional.
